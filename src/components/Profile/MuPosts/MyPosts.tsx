@@ -1,12 +1,17 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
+import {
+    addPostActionCreator,
+    AddPostActionType,
+    ChangeNewPostTextActionType,
+    updateNewPostTextActionCreator
+} from "../../../Redux/State";
 
 type MyPostPropsType = {
     posts: Array<PostsPropsType>
-    addPost: () => void
-    updateNewPostText:(newText:string) => void
-    newPostText:string
+    newPostText: string
+    dispatch: (action: AddPostActionType | ChangeNewPostTextActionType) => void
 }
 
 export type PostsPropsType = {
@@ -20,28 +25,25 @@ type Message = {
     addPostCallBack: (postMessage: string) => void
 }
 
+
+
 const MyPosts = (props: MyPostPropsType) => {
     const postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
     const newPostElement = React.createRef<HTMLTextAreaElement>();
-
     const addPost = () => {
         if (newPostElement.current !== null) {
-            //alert(newPostElement.current.value); /// тут надо написать чтоб посты добавлялись
             const text = newPostElement.current.value;
-            props.addPost();
-            props.updateNewPostText(' ')
+            props.dispatch(addPostActionCreator(props.newPostText));
         }
     };
-
     const onPostChange = () => {
         if (newPostElement.current !== null) {
-            //alert(newPostElement.current.value); /// тут надо написать чтоб посты добавлялись
             const text = newPostElement.current.value;
-            props.updateNewPostText(text);
+            const action = updateNewPostTextActionCreator(text);
+            props.dispatch(action)
         }
     };
     return (
-
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
