@@ -6,7 +6,8 @@ import {
     AddPostActionType,
     ChangeNewPostTextActionType,
     updateNewPostTextActionCreator
-} from "../../../Redux/State";
+} from "../../../Redux/profile-reducer";
+
 
 type MyPostPropsType = {
     posts: Array<PostsPropsType>

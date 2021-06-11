@@ -1,13 +1,12 @@
 import React from 'react';
 import MyPosts from "./MuPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {AddPostActionType, ChangeNewPostTextActionType, profilePageType} from '../../Redux/State';
+import {AppActionsType, profilePageType} from '../../Redux/Store';
 
 type ProfilePropsType = {
     profilePage: profilePageType
-    dispatch: (action: AddPostActionType | ChangeNewPostTextActionType) => void
+    dispatch: (action: AppActionsType) => void
     newPostText: string
-
 }
 
 const Profile = (props: ProfilePropsType) => {

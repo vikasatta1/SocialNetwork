@@ -1,13 +1,9 @@
 import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
-import {
-    dialogPageType,
-    sendMessageCreator,
-    StatePropsType,
-    StoreType,
-    updateNewMessageBodyCreator
-} from '../../Redux/State';
+import {StoreType} from "../../Redux/Store";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "../../Redux/dialogs-reducer";
+
 
 const Message = (props: any) => {
     return (
