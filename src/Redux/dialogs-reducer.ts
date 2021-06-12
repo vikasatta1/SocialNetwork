@@ -7,8 +7,26 @@ export type UpdateNewMessageBodyType = {
 export type SendMessageType = {
     type:"SEND_MESSAGE"
 }
-
-const dialogsReducer = (state: dialogPageType, action: AppActionsType) => {
+const initialState = {
+    messages: [
+        {id: 1, message: "Hi"},
+        {id: 2, message: "How are you"},
+        {id: 3, message: "How are you"},
+        {id: 4, message: "Yo"},
+        {id: 5, message: "Yo"},
+        {id: 6, message: "Yo"}
+    ],
+    dialogs: [
+        {id: 1, name: "Рик Санчез"},
+        {id: 2, name: "Морти Смит"},
+        {id: 3, name: "Бет Смит"},
+        {id: 4, name: "Джери Смит"},
+        {id: 5, name: "Натан"},
+        {id: 6, name: "Огурчик Рик"},
+    ],
+    newMessageBody: ""
+}
+const dialogsReducer = (state: dialogPageType = initialState, action: AppActionsType) => {
     if (action.type === "UPDATE-NEW-MESSAGE-BODY" ){
         state.newMessageBody = action.body;
 

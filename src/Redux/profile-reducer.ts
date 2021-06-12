@@ -8,8 +8,14 @@ export type ChangeNewPostTextActionType = {
     type: "UPDATE-NEW-POST-TEXT",
     newText: string
 }
-
-const profileReducer = (state: profilePageType, action: AppActionsType) => {
+const initialState = {
+        posts: [
+            {id: 1, message: "Hi, how are you?", likesCount: 12},
+            {id: 2, message: "it's my first post", likesCount: 11},
+        ],
+        newPostText: ""
+    }
+const profileReducer = (state: profilePageType = initialState, action: AppActionsType) => {
     if (action.type === "ADD-POST") {          /// если у экшена тип равен адд - сделаем логику добавления поста
         const newPost: PostsType = {
             id: new Date().getTime(),
@@ -23,7 +29,7 @@ const profileReducer = (state: profilePageType, action: AppActionsType) => {
 
     }
 
-    return state
+    return state;
 }
 
 export const addPostActionCreator = (newPostText: string): AddPostActionType => {          //возвращает action

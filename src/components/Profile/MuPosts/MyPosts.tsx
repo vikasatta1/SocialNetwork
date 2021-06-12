@@ -7,26 +7,21 @@ import {
     ChangeNewPostTextActionType,
     updateNewPostTextActionCreator
 } from "../../../Redux/profile-reducer";
-
-
 type MyPostPropsType = {
     posts: Array<PostsPropsType>
     newPostText: string
     dispatch: (action: AddPostActionType | ChangeNewPostTextActionType) => void
+   // addPost: () => void
 }
-
 export type PostsPropsType = {
     id: number
     message: string
     likesCount: number
 }
-
 type Message = {
     message: string
     addPostCallBack: (postMessage: string) => void
 }
-
-
 
 const MyPosts = (props: MyPostPropsType) => {
     const postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
@@ -34,6 +29,7 @@ const MyPosts = (props: MyPostPropsType) => {
     const addPost = () => {
         if (newPostElement.current !== null) {
             const text = newPostElement.current.value;
+
             props.dispatch(addPostActionCreator(props.newPostText));
         }
     };
