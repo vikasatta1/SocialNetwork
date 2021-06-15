@@ -1,12 +1,10 @@
 import React from 'react';
-import MyPosts from "./MuPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {AppActionsType, profilePageType} from '../../Redux/Store';
+import {AppActionsType, profilePageType, StoreType} from '../../Redux/Store';
+import MyPostsContainer from "./MuPosts/Post/MyPostsContainer";
 
 type ProfilePropsType = {
-    profilePage: profilePageType
-    dispatch: (action: AppActionsType) => void
-    newPostText: string
+    store: StoreType
 }
 
 const Profile = (props: ProfilePropsType) => {
@@ -14,9 +12,7 @@ const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.profilePage.posts}
-                     newPostText={props.profilePage.newPostText}
-                     dispatch={props.dispatch}
+            <MyPostsContainer store={props.store}
             />
         </div>
 

@@ -12,8 +12,6 @@ import {AppActionsType, StoreType} from "./Redux/Store";
 
 export  type AppType = {
     dispatch: (action: AppActionsType) => void
-    //addPost: () => void
-    //updateNewPostText: (newText: string) => void
     store: StoreType
 }
 const App:React.FC<AppType> = (props ) => {
@@ -30,11 +28,7 @@ const App:React.FC<AppType> = (props ) => {
 
 
 
-                <Route path='/profile' render={() => <Profile
-                    profilePage={props.store._state.profilePage}
-                    newPostText={props.store._state.profilePage.newPostText}
-                    dispatch = {props.dispatch}
-                />}/>
+                <Route path='/profile' render={() => <Profile store={props.store}/>}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
