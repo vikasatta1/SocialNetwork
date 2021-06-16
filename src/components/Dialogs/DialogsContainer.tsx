@@ -3,6 +3,7 @@ import s from './Dialogs.module.css';
 import {StoreType} from "../../Redux/Store";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../Redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
+import StoreContext from '../../StoreContext';
 
 
 const Message = (props: any) => {
@@ -11,22 +12,25 @@ const Message = (props: any) => {
     )
 }
 type DialogsPropsType = {
-    store: StoreType
+ store:StoreType
 }
 
-const DialogsContainer = (props: DialogsPropsType) => {
-    const state = props.store.getState().dialogsPage;
-    const onSendMessageClick = () => {
-        props.store.dispatch(sendMessageCreator())
-    }
-    const onNewMessageChange = (body: string) => {
-        props.store.dispatch(updateNewMessageBodyCreator(body))
-    }
-    return (<Dialogs
-                     updateNewMessageBody={onNewMessageChange}
-                     sendMessage={onSendMessageClick}
-                     dialogsPage={state}
-    />)
+const DialogsContainer = () => {
+    return <StoreContext.Consumer>
+            {  store => {
+                const onSendMessageClick = () => {
+                    store.dispatch(sendMessageCreator())
+                }
+                const onNewMessageChange = (body: string) => {
+                    store.dispatch(updateNewMessageBodyCreator(body))
+                }
+                return <Dialogs updateNewMessageBody={onNewMessageChange}
+                                sendMessage={onSendMessageClick}
+                                dialogsPage={store.getState().dialogsPage}/>
+            }
+        }
+        </StoreContext.Consumer>
+
 }
 
 

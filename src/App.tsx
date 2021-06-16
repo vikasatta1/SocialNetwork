@@ -12,18 +12,17 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
 export  type AppType = {
-    dispatch: (action: AppActionsType) => void
-    store: StoreType
+    /*dispatch: (action: AppActionsType) => void
+    store: StoreType*/
 }
-const App: React.FC<AppType> = (props) => {
+const App: React.FC<AppType> = () => {
     return (
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path='/dialogs' render={() => <DialogsContainer
-                    store={props.store}/>}/>
-                <Route path='/profile' render={() => <Profile store={props.store}/>}/>
+                <Route path='/dialogs' render={() => <DialogsContainer />}/>
+                <Route path='/profile' render={() => <Profile />}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>

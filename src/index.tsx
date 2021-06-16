@@ -4,18 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
-// import store from "./Redux/reduxe-store";
 import store from './Redux/Store'
+import  {Provider} from "./StoreContext";
 
 export const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App store={store} dispatch={store.dispatch.bind(store)}/>
-        </BrowserRouter>,
-        document.getElementById('root')
+            <Provider store={store}>
+            <App />
+            </Provider>
+        </BrowserRouter>, document.getElementById('root')
     );
 }
-// rerenderEntireTree(store.getState());
+
 rerenderEntireTree();
 
 store.subscribe(() => {

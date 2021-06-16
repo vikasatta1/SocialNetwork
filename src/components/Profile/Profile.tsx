@@ -4,7 +4,7 @@ import {AppActionsType, profilePageType, StoreType} from '../../Redux/Store';
 import MyPostsContainer from "./MuPosts/Post/MyPostsContainer";
 
 type ProfilePropsType = {
-    store: StoreType
+    /*store: StoreType*/
 }
 
 const Profile = (props: ProfilePropsType) => {
@@ -12,8 +12,7 @@ const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store}
-            />
+            <MyPostsContainer  />
         </div>
 
     );
