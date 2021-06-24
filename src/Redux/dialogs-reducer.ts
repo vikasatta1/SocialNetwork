@@ -1,4 +1,4 @@
-import {AppActionsType, dialogPageType} from "./Store";
+import {AppActionsType} from "./Store";
 
 export type UpdateNewMessageBodyType = {
     type:"UPDATE-NEW-MESSAGE-BODY",
@@ -26,6 +26,21 @@ const initialState = {
     ],
     newMessageBody: ""
 }
+type MessagesType = {
+    id: number
+    message: string
+}
+type DialogsType = {
+    id: number
+    name: string
+}
+ export type dialogPageType = {
+    messages: Array<MessagesType>
+    dialogs: Array<DialogsType>
+    newMessageBody: string
+}
+
+
 const dialogsReducer = (state: dialogPageType = initialState, action: AppActionsType) => {
     if (action.type === "UPDATE-NEW-MESSAGE-BODY" ){
         state.newMessageBody = action.body;
