@@ -9,10 +9,6 @@ import {StoreType} from "../../../../Redux/Store";
 import {connect} from "react-redux";
 import {AppStoreType} from "../../../../Redux/reduxe-store";
 
-
-type MyPostsContainerPropsType = {
-    store:StoreType
-}
 const mapStateProps = (state:AppStoreType) => {
     return {
         posts:state.profilePage.posts,

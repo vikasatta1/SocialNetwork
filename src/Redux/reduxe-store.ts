@@ -9,9 +9,8 @@ let rootReducer = combineReducers({
     sidebar: sidebarReducer
 });
 
-const store: AppStoreType = createStore(rootReducer);
+export const store: any = createStore(rootReducer);
 
 export type AppStoreType = ReturnType<typeof rootReducer>
+// @ts-ignore
 window.store = store;
-
-export default store;

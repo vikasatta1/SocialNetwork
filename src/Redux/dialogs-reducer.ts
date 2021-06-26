@@ -41,7 +41,7 @@ type DialogsType = {
 }
 
 
-const dialogsReducer = (state: dialogPageType = initialState, action: AppActionsType) => {
+const dialogsReducer = (state = initialState, action: AppActionsType): dialogPageType  => {
     if (action.type === "UPDATE-NEW-MESSAGE-BODY" ){
         state.newMessageBody = action.body;
 

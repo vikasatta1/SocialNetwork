@@ -15,7 +15,7 @@ const initialState = {
         ],
         newPostText: ""
     }
-const profileReducer = (state: profilePageType = initialState, action: AppActionsType) => {
+const profileReducer = (state: profilePageType = initialState, action: AppActionsType): any => {
     if (action.type === "ADD-POST") {          /// если у экшена тип равен адд - сделаем логику добавления поста
         const newPost: PostsType = {
             id: new Date().getTime(),

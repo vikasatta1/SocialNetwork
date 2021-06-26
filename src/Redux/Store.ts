@@ -21,11 +21,18 @@ type DialogsType = {
     id: number
     name: string
 }
- type dialogPageType = {
+export type dialogPageType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
     newMessageBody: string
 }
+
+
+export type dType = {
+    dialogs: Array<DialogsType>
+}
+
+
 export type StatePropsType = {
     profilePage: profilePageType
     dialogsPage: dialogPageType
