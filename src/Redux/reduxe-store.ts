@@ -9,7 +9,7 @@ let rootReducer = combineReducers({
     sidebar: sidebarReducer
 });
 
-export const store: any = createStore(rootReducer);
+export const store = createStore(rootReducer);
 
 export type AppStoreType = ReturnType<typeof rootReducer>
 // @ts-ignore

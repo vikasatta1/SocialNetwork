@@ -8,6 +8,7 @@ import {
 import {StoreType} from "../../../../Redux/Store";
 import {connect} from "react-redux";
 import {AppStoreType} from "../../../../Redux/reduxe-store";
+import {Dispatch} from "redux";
 
 const mapStateProps = (state:AppStoreType) => {
     return {
@@ -15,10 +16,10 @@ const mapStateProps = (state:AppStoreType) => {
         newPostText:state.profilePage.newPostText
     }
 }
-const mapDispatchToProps = (dispatch:any) => {
+const mapDispatchToProps = (dispatch:Dispatch) => {
     return {
         addPost:() =>{
-            dispatch(addPostActionCreator);},
+            dispatch(addPostActionCreator());},
         updateNewPostText:(text: string) => {
             const action = updateNewPostTextActionCreator(text);
             dispatch(action)},
