@@ -12,7 +12,7 @@ const initialState = {
         {id: 1, message: "Hi, how are you?", likesCount: 12},
         {id: 2, message: "it's my first post", likesCount: 11},
     ],
-    newPostText: "4wewe"
+    newPostText: ""
 }
 const profileReducer = (state: profilePageType = initialState, action: AppActionsType): profilePageType => {
     if (action.type === "ADD-POST") {          /// если у экшена тип равен адд - сделаем логику добавления поста
