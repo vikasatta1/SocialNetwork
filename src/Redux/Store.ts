@@ -1,13 +1,13 @@
 import profileReducer, {AddPostActionType, ChangeNewPostTextActionType} from "./profile-reducer";
 import dialogsReducer, {SendMessageType, UpdateNewMessageBodyType} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
+import {UsersACType} from "./users-reducer";
 
 export type PostsType = {
     id: number
     message: string
     likesCount: number
 }
-
 export type profilePageType = {
     posts: Array<PostsType>
     newPostText: string
@@ -26,13 +26,9 @@ export type dialogPageType = {
     dialogs: Array<DialogsType>
     newMessageBody: string
 }
-
-
 export type dType = {
     dialogs: Array<DialogsType>
 }
-
-
 export type StatePropsType = {
     profilePage: profilePageType
     dialogsPage: dialogPageType
@@ -48,7 +44,7 @@ export type StoreType = {
 
 export type ProfileActionsType = AddPostActionType | ChangeNewPostTextActionType
 export type DialogsActionsType = UpdateNewMessageBodyType | SendMessageType
-export type AppActionsType = ProfileActionsType | DialogsActionsType
+export type AppActionsType = ProfileActionsType | DialogsActionsType | UsersACType
 
 
 const store: StoreType = {

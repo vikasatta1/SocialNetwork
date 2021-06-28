@@ -1,5 +1,7 @@
+import {AppStoreType} from "./reduxe-store";
+import {AppActionsType} from "./Store";
 
-type UsersACType = FollowType | UnFollowType | SetUsersType
+export type UsersACType = FollowType | UnFollowType | SetUsersType
  type FollowType = {
     type:"FOLLOW"
     userId:number
@@ -10,34 +12,57 @@ type UsersACType = FollowType | UnFollowType | SetUsersType
 }
 type SetUsersType = {
     type: "SET_USERS"
-    users:any
+    users:UserType
 }
-export type UsersPageType = Array<userType>
-export type userType = {
+
+export type UserType = {
     id:number
+    photoUrl:string
+    followed: boolean
     fillName:string
     status:string
-    location:{
-        city:string
-        country:string
-    }
+    location:UsersLocation
+}
+ type UsersLocation = {
+    city:string
+    country:string
+}
+export type UsersInitialStateType = {
+    users:Array<UserType>
 }
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
 
-const initialState = {
+const InitialState:UsersInitialStateType = {
     users:[
-        {id:1, fillName:"Mo", status:"I am boss", location: {city: "Minsk", country: "Belarus"}},
-        {id:2, fillName:"Cucumber", status:"I am boss too", location: {city: "Minsk", country: "Belarus"}},
-        {id:3, fillName:"Anny", status:"I am boss too", location: {city: "Moscow", country: "Russia"}},
-        {id:4, fillName:"Leo", status:"I like eating", location: {city: "Gomal", country: "Belarus"}}
+/*        {
+            id:1,
+            photoUrl:"https://static.wikia.nocookie.net/rickandmorty/images/0/02/%D0%97%D0%BB%D0%BE%D0%B9_%D0%9C%D0%BE%D1%80%D1%82%D0%B8_001.jpg/revision/latest?cb=20190714125714&path-prefix=ru",
+            followed: false,
+            fillName:"Mo",
+            status:"I am boss",
+            location: {city: "Minsk", country: "Belarus"}},
+        {
+            id:2,
+            photoUrl:"https://static.wikia.nocookie.net/rickandmorty/images/0/02/%D0%97%D0%BB%D0%BE%D0%B9_%D0%9C%D0%BE%D1%80%D1%82%D0%B8_001.jpg/revision/latest?cb=20190714125714&path-prefix=ru",
+            followed: true,
+            fillName:"Cucumber",
+            status:"I am boss too",
+            location: {city: "Minsk", country: "Belarus"}},
+        {
+            id:3,
+            photoUrl:"https://static.wikia.nocookie.net/rickandmorty/images/0/02/%D0%97%D0%BB%D0%BE%D0%B9_%D0%9C%D0%BE%D1%80%D1%82%D0%B8_001.jpg/revision/latest?cb=20190714125714&path-prefix=ru",
+            followed: false,
+            fillName:"Anny",
+            status:"I am boss too",
+            location: {city: "Moscow", country: "Russia"}},*/
     ]
 }
 
 
 
-export const usersReducer = (state=initialState, action: UsersACType) => {
+export const usersReducer = (state = InitialState, action: AppActionsType):UsersInitialStateType => {
     switch (action.type){
         case  FOLLOW:
             return  {
@@ -71,12 +96,12 @@ export const usersReducer = (state=initialState, action: UsersACType) => {
 }
 
 export const followAC = (userId:number):FollowType => {
-    return {type:FOLLOW, userId:1}
+    return {type:FOLLOW, userId}
 }
 export const unfollowAC = (userId:number):UnFollowType => {
-    return {type:UNFOLLOW, userId:2}
+    return {type:UNFOLLOW, userId}
 }
-export const setUsersAC = (users:any) => ({type: SET_USERS, users})
+export const setUsersAC = (users:Array<UserType>) => ({type: SET_USERS, users})
 
 
 
