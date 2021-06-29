@@ -36,27 +36,27 @@ const SET_USERS = "SET_USERS"
 
 const InitialState:UsersInitialStateType = {
     users:[
-/*        {
+      {
             id:1,
-            photoUrl:"https://static.wikia.nocookie.net/rickandmorty/images/0/02/%D0%97%D0%BB%D0%BE%D0%B9_%D0%9C%D0%BE%D1%80%D1%82%D0%B8_001.jpg/revision/latest?cb=20190714125714&path-prefix=ru",
+            photoUrl:"https://sci-fi-news.ru/wp-content/uploads/2018/03/Rick-and-Morty-14-Morty-is-Insane-850x500.jpg",
             followed: false,
             fillName:"Mo",
             status:"I am boss",
             location: {city: "Minsk", country: "Belarus"}},
         {
             id:2,
-            photoUrl:"https://static.wikia.nocookie.net/rickandmorty/images/0/02/%D0%97%D0%BB%D0%BE%D0%B9_%D0%9C%D0%BE%D1%80%D1%82%D0%B8_001.jpg/revision/latest?cb=20190714125714&path-prefix=ru",
+            photoUrl:"https://i.pinimg.com/236x/7c/94/c1/7c94c1a26d55c0dcbf18be3dda271bef.jpg",
             followed: true,
             fillName:"Cucumber",
             status:"I am boss too",
             location: {city: "Minsk", country: "Belarus"}},
         {
             id:3,
-            photoUrl:"https://static.wikia.nocookie.net/rickandmorty/images/0/02/%D0%97%D0%BB%D0%BE%D0%B9_%D0%9C%D0%BE%D1%80%D1%82%D0%B8_001.jpg/revision/latest?cb=20190714125714&path-prefix=ru",
+            photoUrl:"https://i.pinimg.com/236x/7c/94/c1/7c94c1a26d55c0dcbf18be3dda271bef.jpg",
             followed: false,
             fillName:"Anny",
             status:"I am boss too",
-            location: {city: "Moscow", country: "Russia"}},*/
+            location: {city: "Moscow", country: "Russia"}},
     ]
 }
 
