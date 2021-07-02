@@ -16,12 +16,12 @@ type SetUsersType = {
 }
 
 export type UserType = {
+    name:string
     id:number
-    photoUrl:string
-    followed: boolean
-    fillName:string
+    photos:string
     status:string
-    location:UsersLocation
+    followed: boolean
+   /* location:UsersLocation*/
 }
  type UsersLocation = {
     city:string
@@ -35,8 +35,8 @@ const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
 
 const InitialState:UsersInitialStateType = {
-    users:[
-      {
+    users:[]
+      /*{
             id:1,
             photoUrl:"https://sci-fi-news.ru/wp-content/uploads/2018/03/Rick-and-Morty-14-Morty-is-Insane-850x500.jpg",
             followed: false,
@@ -57,7 +57,7 @@ const InitialState:UsersInitialStateType = {
             fillName:"Anny",
             status:"I am boss too",
             location: {city: "Moscow", country: "Russia"}},
-    ]
+    ]*/
 }
 
 
