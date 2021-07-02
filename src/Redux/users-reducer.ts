@@ -1,4 +1,4 @@
-import {AppStoreType} from "./reduxe-store";
+import {AppStateType} from "./reduxe-store";
 import {AppActionsType} from "./Store";
 
 export type UsersACType = FollowType | UnFollowType | SetUsersType

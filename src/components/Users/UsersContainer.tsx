@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
-import {AppStoreType} from "../../Redux/reduxe-store";
+import {AppStateType} from "../../Redux/reduxe-store";
 import {Dispatch} from "redux";
 import {
     followAC,
@@ -20,7 +20,7 @@ type mapDispatchToProps = {
     unFollow:(userId:number) => void
     setUsers:(users:Array<UserType>) => void
 }
-const mapStateProps = (state: AppStoreType):mapStatePropsType => {
+const mapStateProps = (state: AppStateType):mapStatePropsType => {
     return{
         users: state.usersPage.users
     }
@@ -33,4 +33,4 @@ const mapDispatchToProps = (dispatch: Dispatch):mapDispatchToProps => {
     }
 }
 
-export const UsersContainer = connect<mapStatePropsType, mapDispatchToProps, {}, AppStoreType>(mapStateProps, mapDispatchToProps)(Users);
+export const UsersContainer = connect<mapStatePropsType, mapDispatchToProps, {}, AppStateType>(mapStateProps, mapDispatchToProps)(Users);
