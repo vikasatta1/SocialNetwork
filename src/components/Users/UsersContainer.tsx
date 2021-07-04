@@ -7,7 +7,6 @@ import {
     followAC,
     setUsersAC,
     unfollowAC,
-    UsersInitialStateType,
     UserType
 } from "../../Redux/users-reducer";
 
