@@ -12,23 +12,28 @@ export type UsersACType = FollowType | UnFollowType | SetUsersType
 }
 type SetUsersType = {
     type: "SET_USERS"
-    users:UserType
+    users:Array<UserType>
 }
 
 export type UserType = {
     name:string
     id:number
-    photos:string
+    photos:PhotosType
     status:string
     followed: boolean
    /* location:UsersLocation*/
+}
+
+export type PhotosType = {
+    small: null | string
+    large: null | string
 }
  type UsersLocation = {
     city:string
     country:string
 }
 export type UsersInitialStateType = {
-    users:Array<UserType>
+    users: Array<UserType>
 }
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
@@ -85,7 +90,7 @@ export const usersReducer = (state = InitialState, action: AppActionsType):Users
                 })
             }
         case SET_USERS:{
-            return {...state, users: [...state.users, action.users]}
+            return {...state, users:  action.users}
         }
 
         default:
