@@ -13,18 +13,24 @@ type UsersPropsType = {
 }
 
 class Users extends React.Component<UsersPropsType, AppActionsType> {
-    constructor(props:any) {
-        super(props);
+    componentDidMount() {
         axios.get("https://social-network.samuraijs.com/api/1.0/users")
             .then(response => {
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(response.data.items);
             });
-
     }
+
     render() {
         return (<div>
-
-                {this.props.users.map(u => <div key={u.id}>
+                <div>
+                    <span>1</span>
+                    <span className={styles.selectedPage}>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                </div>
+                {
+                    this.props.users.map(u => <div key={u.id}>
                         <span>
                             <div>
                                 <img src={u.photos.small ? u.photos.small : userPhoto} className={styles.userPhoto}/>
@@ -39,7 +45,7 @@ class Users extends React.Component<UsersPropsType, AppActionsType> {
                                     }}>Follow</button>}
                             </div>
                         </span>
-                    <span>
+                        <span>
                             <span>
                                 <div>{u.name}</div><div>{u.status}</div>
                             </span>
@@ -48,7 +54,7 @@ class Users extends React.Component<UsersPropsType, AppActionsType> {
                                 <div>{"u.location.city"}</div>
                             </span>
                         </span>
-                </div>)
+                    </div>)
                 }
             </div>
         )
