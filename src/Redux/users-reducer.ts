@@ -44,6 +44,7 @@ export type UsersInitialStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage:number
+    isFetching: boolean
 }
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
@@ -55,7 +56,8 @@ const InitialState:UsersInitialStateType = {
     users:[],
     pageSize: 5,
     totalUsersCount:0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 export const usersReducer = (state = InitialState, action: AppActionsType):UsersInitialStateType => {
