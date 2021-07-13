@@ -1,26 +1,32 @@
 import {AppStateType} from "./reduxe-store";
 import {AppActionsType} from "./Store";
 
-export type UsersACType = FollowType | UnFollowType | SetUsersType | SetCurrentPageType | SetTotalUsersCountType
+export type UsersACType = FollowType | UnFollowType | SetUsersType | SetCurrentPageType | SetTotalUsersCountType | ToggleIsFetching
  type FollowType = {
     type:"FOLLOW"
     userId:number
-}
+};
  type UnFollowType = {
     type:"UNFOLLOW"
     userId:number
-}
+};
+
+
 type SetUsersType = {
     type: "SET_USERS"
     users:Array<UserType>
-}
+};
 type SetCurrentPageType = {
     type:"SET_CURRENT_PAGE"
     currentPage:number
-}
+};
 type SetTotalUsersCountType = {
     type: "SET_TOTAL_USERS_COUNT"
     count:number
+};
+type ToggleIsFetching = {
+    type:"TOGGLE_IS_FETCHING"
+    isFetching:boolean
 }
 
 export type UserType = {
@@ -29,36 +35,36 @@ export type UserType = {
     photos:PhotosType
     status:string
     followed: boolean
-}
-
+};
 export type PhotosType = {
     small: null | string
     large: null | string
-}
+};
  type UsersLocation = {
     city:string
     country:string
-}
+};
 export type UsersInitialStateType = {
     users: Array<UserType>
     pageSize: number
     totalUsersCount: number
     currentPage:number
     isFetching: boolean
-}
-const FOLLOW = "FOLLOW"
-const UNFOLLOW = "UNFOLLOW"
-const SET_USERS = "SET_USERS"
-const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
-const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
+};
+const FOLLOW = "FOLLOW";
+const UNFOLLOW = "UNFOLLOW";
+const SET_USERS = "SET_USERS";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
+const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 
 const InitialState:UsersInitialStateType = {
     users:[],
     pageSize: 5,
     totalUsersCount:0,
     currentPage: 1,
-    isFetching: false
-}
+    isFetching: true
+};
 
 export const usersReducer = (state = InitialState, action: AppActionsType):UsersInitialStateType => {
     switch (action.type){
@@ -91,22 +97,22 @@ export const usersReducer = (state = InitialState, action: AppActionsType):Users
         case SET_TOTAL_USERS_COUNT:{
             return {...state, totalUsersCount: action.count}
         }
+        case TOGGLE_IS_FETCHING:{
+            return {...state,  isFetching: action.isFetching}
+        }
         default:
             return state
 
     }
 
-}
+};
 
-export const followAC = (userId:number):FollowType => {
-    return {type:FOLLOW, userId}
-}
-export const unfollowAC = (userId:number):UnFollowType => {
-    return {type:UNFOLLOW, userId}
-}
-export const setUsersAC = (users:Array<UserType>) => ({type: SET_USERS, users})
-export const setCurrentPageAC = (currentPage:number) => ({type:SET_CURRENT_PAGE, currentPage:currentPage})
-export const setTotalUsersCountAC = (totalUsersCount:number) => ({type:SET_TOTAL_USERS_COUNT, count: totalUsersCount})
+export const followAC = (userId:number):FollowType => {return {type:FOLLOW, userId}};
+export const unfollowAC = (userId:number):UnFollowType => {return {type:UNFOLLOW, userId}};
+export const setUsersAC = (users:Array<UserType>) => ({type: SET_USERS, users});
+export const setCurrentPageAC = (currentPage:number) => ({type:SET_CURRENT_PAGE, currentPage:currentPage});
+export const setTotalUsersCountAC = (totalUsersCount:number) => ({type:SET_TOTAL_USERS_COUNT, count: totalUsersCount});
+export const toggleIsFetchingAC = (isFetching:boolean):ToggleIsFetching => ({type:TOGGLE_IS_FETCHING, isFetching});
 
 
 

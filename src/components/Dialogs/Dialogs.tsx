@@ -3,18 +3,11 @@ import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import {DialogsPropsType} from "./DialogsContainer";
 
-
 const Message = (props: any) => {
     return (
         <div className={s.message}>{props.message}</div>
     )
 }
-// type  DialogsPropsType = {
-//     updateNewMessageBody: (body: any) => void
-//     sendMessage: () => void
-//     dialogsPage: dialogPageType
-// }
-
 const Dialogs = (props: DialogsPropsType) => {
     const state = props.dialogsPage;
     const dialogsElements = state.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>);

@@ -4,7 +4,6 @@ import s from './Navbar.module.css';
 
 const Navbar = () => {
     return (<nav className={s.nav}>
-
             <div className={s.item}>
                 <NavLink to="/profile" activeClassName={s.activeLink}>Profile</NavLink>
             </div>
@@ -23,7 +22,6 @@ const Navbar = () => {
             <div className={s.item}>
                 <NavLink to="settings" activeClassName={s.activeLink}>Settings</NavLink>
             </div>
-
         </nav>
 
     );

@@ -7,7 +7,6 @@ import {BrowserRouter} from "react-router-dom";
 import {store} from './Redux/reduxe-store'
 import {Provider} from "react-redux";
 
-
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
@@ -15,19 +14,4 @@ import {Provider} from "react-redux";
             </Provider>
         </BrowserRouter>, document.getElementById('root')
     );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  reportWebVitals();
