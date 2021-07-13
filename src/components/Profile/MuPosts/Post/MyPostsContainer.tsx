@@ -5,11 +5,9 @@ import {
     updateNewPostTextActionCreator
 }
     from "../../../../Redux/profile-reducer";
-import {StoreType} from "../../../../Redux/Store";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../../Redux/reduxe-store";
 import {Dispatch} from "redux";
-
 const mapStateProps = (state:AppStateType) => {
     return {
         posts:state.profilePage.posts,

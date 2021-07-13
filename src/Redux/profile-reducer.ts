@@ -1,5 +1,7 @@
 import {AppActionsType, PostsType, ProfileActionsType, profilePageType} from "./Store";
 
+
+
 export type AddPostActionType = {
     type: "ADD-POST",
 }
@@ -7,6 +9,8 @@ export type ChangeNewPostTextActionType = {
     type: "UPDATE-NEW-POST-TEXT",
     newText: string
 }
+const  ADD_POST = "ADD_POST"
+const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT"
 const initialState = {
     posts: [
         {id: 1, message: "Hi, how are you?", likesCount: 12},
@@ -36,27 +40,6 @@ const profileReducer = (state: profilePageType = initialState, action: AppAction
     return state;
 }
 
-/*switch (action.type) {
-    case ADD - POST:{
-        const newPost: PostsType = {
-            id: new Date().getTime(),
-            message: state.newPostText,
-            likesCount: 0
-        };
-        const stateCopy = {...state}
-        stateCopy.posts = [...state.posts]
-        stateCopy.posts.push(newPost);
-        stateCopy.newPostText = "";
-        return stateCopy;
-    }
-    case UPDATE-NEW-POST-TEXT: {
-        const stateCopy = {...state}       // иначе если тип равет
-        stateCopy.newPostText = action.newText;
-        return stateCopy;
-    }
-    default:
-        return state;
-}*/
 
 
 export const addPostActionCreator = (): AddPostActionType => {          //возвращает action
