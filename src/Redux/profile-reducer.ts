@@ -1,4 +1,4 @@
-import {AppActionsType, PostsType, ProfileActionsType, profilePageType} from "./Store";
+import {AppActionsType, PostsType, profilePageType} from "./Store";
 
 export type AddPostActionType = {
     type: "ADD-POST",
@@ -28,13 +28,13 @@ const initialState = {
 
 type contactType = {
     facebook: string,
-    website: null |string,
+    website: string,
     vk: string,
     twitter: string,
     instagram:string,
-    youtube: string | null,
+    youtube: string ,
     github: string,
-    mainLink: string | null
+    mainLink: string
 }
 
 type photoType = {

@@ -1,4 +1,3 @@
-import {AppStateType} from "./reduxe-store";
 import {AppActionsType} from "./Store";
 
 export type UsersACType = FollowType | UnFollowType | SetUsersType | SetCurrentPageType | SetTotalUsersCountType | ToggleIsFetching
