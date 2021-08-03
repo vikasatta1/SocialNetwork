@@ -1,6 +1,6 @@
-import profileReducer, {AddPostActionType, ChangeNewPostTextActionType} from "./profile-reducer";
-import dialogsReducer, {SendMessageType, UpdateNewMessageBodyType} from "./dialogs-reducer";
-import sidebarReducer from "./sidebar-reducer";
+import {AddPostActionType, ChangeNewPostTextActionType, ProfileType, SetUserProfileType} from "./profile-reducer";
+import  {SendMessageType, UpdateNewMessageBodyType} from "./dialogs-reducer";
+
 import {UsersACType} from "./users-reducer";
 
 export type PostsType = {
@@ -9,8 +9,10 @@ export type PostsType = {
     likesCount: number
 }
 export type profilePageType = {
+    profile: ProfileType | null
     posts: Array<PostsType>
     newPostText: string
+
 
 }
 type MessagesType = {
@@ -39,11 +41,12 @@ export type StoreType = {
     dispatch: (action: AppActionsType ) => void
 }
 
-export type ProfileActionsType = AddPostActionType | ChangeNewPostTextActionType
+export type ProfileActionsType = AddPostActionType | ChangeNewPostTextActionType | SetUserProfileType
 export type DialogsActionsType = UpdateNewMessageBodyType | SendMessageType
 export type AppActionsType = ProfileActionsType | DialogsActionsType | UsersACType
 
 
+/*
 const store: StoreType = {
     _state: {
         profilePage: {
@@ -95,5 +98,6 @@ const store: StoreType = {
 export default store;
 // @ts-ignore
 window.store = store;
+*/
 
 ///37 lesson OOP;

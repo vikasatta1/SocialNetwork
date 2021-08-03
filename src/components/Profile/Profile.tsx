@@ -5,11 +5,11 @@ import MyPostsContainer from "./MuPosts/Post/MyPostsContainer";
 type ProfilePropsType = {
 }
 
-const Profile = (props: ProfilePropsType) => {
+const Profile = (props: any) => {
 
     return (
         <div>
-            <ProfileInfo/>
+            <ProfileInfo profile={props.props}/>
             <MyPostsContainer  />
         </div>
 
