@@ -1,4 +1,4 @@
-import {AppActionsType, PostsType, profilePageType} from "./Store";
+import {AppActionsType} from "./Store";
 
 export type AddPostActionType = {
     type: "ADD-POST",
@@ -24,6 +24,17 @@ const initialState = {
         {id: 2, message: "it's my first post", likesCount: 11},
     ],
     newPostText: "",
+}
+
+export type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+export type profilePageType = {
+    profile: ProfileType | null
+    posts: Array<PostsType>
+    newPostText: string
 }
 
 type contactType = {
@@ -86,7 +97,7 @@ export const addPostActionCreator = (): AddPostActionType => {          //воз
 export const updateNewPostTextActionCreator = (newText: string): ChangeNewPostTextActionType => {
     return {type: "UPDATE-NEW-POST-TEXT", newText: newText}
 }
-export const setUserProfileAC = (user: ProfileType) => ({type: "SET_USER_PROFILE", user})
+export const setUserProfileAC = (user: ProfileType):SetUserProfileType=> ({type: "SET_USER_PROFILE", user})
 
 
 export default profileReducer;

@@ -3,18 +3,17 @@ import  {SendMessageType, UpdateNewMessageBodyType} from "./dialogs-reducer";
 
 import {UsersACType} from "./users-reducer";
 
-export type PostsType = {
+ type PostsType = {
     id: number
     message: string
     likesCount: number
 }
-export type profilePageType = {
+ type profilePageType = {
     profile: ProfileType | null
     posts: Array<PostsType>
     newPostText: string
-
-
 }
+
 type MessagesType = {
     id: number
     message: string
