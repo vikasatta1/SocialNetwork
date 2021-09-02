@@ -1,4 +1,3 @@
-import {AppActionsType} from "./Store";
 
 export type AddPostActionType = {
     type: "ADD-POST",
@@ -11,11 +10,6 @@ export type SetUserProfileType = {
     type: "SET_USER_PROFILE"
     user:ProfileType
 }
-
-const ADD_POST = "ADD_POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT"
-const SET_USER_PROFILE = "SET_USER_PROFILE"
-
 
 const initialState = {
     profile: null,
@@ -61,9 +55,9 @@ export type ProfileType = {
     userId: number,
     photos: photoType
 }
+export type ProfileActionsType = AddPostActionType | ChangeNewPostTextActionType | SetUserProfileType
 
-
-const profileReducer = (state: profilePageType = initialState, action: AppActionsType): profilePageType => {
+const profileReducer = (state: profilePageType = initialState, action: ProfileActionsType): profilePageType => {
     if (action.type === "ADD-POST") {          /// если у экшена тип равен адд - сделаем логику добавления поста
         const newPost: PostsType = {
             id: new Date().getTime(),
