@@ -1,5 +1,4 @@
 import React from 'react';
-import ProfileInfo from "./ProfileInfo";
 import axios from "axios";
 import {AppStateType} from "../../../Redux/reduxe-store";
 import {connect} from "react-redux";

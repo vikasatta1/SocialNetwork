@@ -1,34 +1,56 @@
 import React from "react";
 
-const SET_USER_DATA = "SET_USER_DATA";
+
 export type authAT = setUserDataAT
 type setUserDataAT = {
     type: "SET_USER_DATA",
-    data:{ userId: number,
+    data: {
+        id: number,
         email: string,
-        login: string}
+        login: string,
+    }
 
 }
-const initialState = {
-    userId: null,
-    email: null,
-    login: null,
+type authStateType = {
+    userId: null | number,
+    email:null | string,
+    login: null | string
 };
 
-const authReducer = (state: any = initialState, action: authAT) => {
+type Api = {
+    data: {
+        id: number,
+        login: string,
+        email: string
+    },
+    messages: [],
+    fieldsErrors: [],
+    resultCode: number
+}
+
+const initialState = {
+    id: null,
+    email: null,
+    login: null ,
+    isAuth: false
+}
+
+const authReducer = (state = initialState , action: authAT) => {
     switch (action.type) {
-        case SET_USER_DATA:
+        case "SET_USER_DATA":
             return {
                 ...state,
-                ...action.data
+                ...action.data,
+                isAuth: true
             }
     }
 }
 
-export const setUserData = (userId: number, email: string, login: string): setUserDataAT => ({
+export const setAuthUserData = (id: number, email: string, login: string): setUserDataAT => ({
     type: "SET_USER_DATA",
     data: {
-        userId, email, login
-    }})
+        id, email, login
+    }
+})
 
 export default authReducer;

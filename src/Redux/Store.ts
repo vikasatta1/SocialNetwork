@@ -1,20 +1,19 @@
 import {
-    AddPostActionType,
-    ChangeNewPostTextActionType,
+
     ProfileActionsType,
     ProfileType,
-    SetUserProfileType
+
 } from "./profile-reducer";
-import {DialogsActionType, SendMessageType, UpdateNewMessageBodyType} from "./dialogs-reducer";
+import {DialogsActionType, } from "./dialogs-reducer";
 
 import {UsersACType} from "./users-reducer";
 
- type PostsType = {
+type PostsType = {
     id: number
     message: string
     likesCount: number
 }
- type profilePageType = {
+type profilePageType = {
     profile: ProfileType | null
     posts: Array<PostsType>
     newPostText: string
@@ -80,7 +79,6 @@ const store: StoreType = {
             newMessageBody: ""
         },
         sidebar: {}
-
     },
     _callSubscriber() {
         console.log("State changed")
@@ -98,10 +96,10 @@ const store: StoreType = {
         this._callSubscriber(this._state)
     }
 }
-
 export default store;
 // @ts-ignore
 window.store = store;
 */
 
 ///37 lesson OOP;
+
