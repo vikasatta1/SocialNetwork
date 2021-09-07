@@ -1,3 +1,4 @@
+import {AppActionsType} from "./reduxe-store";
 
 export type AddPostActionType = {
     type: "ADD-POST",
@@ -57,7 +58,7 @@ export type ProfileType = {
 }
 export type ProfileActionsType = AddPostActionType | ChangeNewPostTextActionType | SetUserProfileType
 
-const profileReducer = (state: profilePageType = initialState, action: ProfileActionsType): profilePageType => {
+const profileReducer = (state: profilePageType = initialState, action: AppActionsType): profilePageType => {
     if (action.type === "ADD-POST") {          /// если у экшена тип равен адд - сделаем логику добавления поста
         const newPost: PostsType = {
             id: new Date().getTime(),

@@ -5,13 +5,22 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {setAuthUserData} from "../../Redux/auth-reducer";
 import {AppStateType} from "../../Redux/reduxe-store";
+import {RouteComponentProps, withRouter} from "react-router";
 
-
-
-class HeaderContainer extends React.Component<any, any>  {
+type OwnProps = {}
+type PathParamsType = {
+    id: null,
+    email: null,
+    login: null ,
+    isAuth: false
+}
+type OwnPropsType = mapStatePropsType & mapDispatchPropsType
+// @ts-ignore
+type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
+class HeaderContainer extends React.Component<PropsType>  {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0//auth/me`,{
-            withCredentials:true
+        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,{
+            withCredentials:true //ваша авторизация
             })
             .then(response => {
               if (response.data.resultCode === 0){
@@ -29,19 +38,23 @@ class HeaderContainer extends React.Component<any, any>  {
 
 
 }
-type MapStatePropsType = {
+type mapStatePropsType = {
     isAuth: boolean,
     login: null | string
 }
-type MapDispatchPropsType = {
+type mapDispatchPropsType = {
 
 }
-export type HeaderPropsType = MapDispatchPropsType & MapStatePropsType
-const mapStateToProps = (state:AppStateType):MapStatePropsType => ({
+export type HeaderPropsType = mapDispatchPropsType & mapStatePropsType
+const mapStateProps = (state:AppStateType):mapStatePropsType => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login
 })
 const mapDispatchTiProps = (dispatch: Dispatch) => {
 
 }
-export default connect(mapStateToProps,{setAuthUserData})(HeaderContainer);
+let withUrlDataContainerComponent = withRouter(HeaderContainer)
+/*export default connect(mapStateToProps,{setAuthUserData})(HeaderContainer);*/
+
+export default connect<mapStatePropsType, mapDispatchPropsType, OwnProps, AppStateType>
+(mapStateProps, {setAuthUserData})(withUrlDataContainerComponent);

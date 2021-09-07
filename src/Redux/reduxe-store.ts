@@ -18,7 +18,5 @@ export const store = createStore(rootReducer);
 
 export type AppStateType = ReturnType<typeof rootReducer>
 export type AppActionsType = ProfileActionsType | DialogsActionType | UsersACType | authAT
-/*
 // @ts-ignore
 window.store = store;
-*/

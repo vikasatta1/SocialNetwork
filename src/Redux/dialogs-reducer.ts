@@ -42,7 +42,7 @@ type DialogsType = {
 
 export type DialogsActionType = UpdateNewMessageBodyType | SendMessageType
 
-const dialogsReducer = (state = initialState, action: DialogsActionType): dialogPageType  => {
+const dialogsReducer = (state = initialState, action: AppActionsType): dialogPageType  => {
     if (action.type === "UPDATE-NEW-MESSAGE-BODY" ){
         return {
             ...state,

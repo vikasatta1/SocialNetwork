@@ -1,4 +1,5 @@
 import React from "react";
+import {AppActionsType} from "./reduxe-store";
 
 
 export type authAT = setUserDataAT
@@ -8,6 +9,7 @@ type setUserDataAT = {
         id: number,
         email: string,
         login: string,
+        isAuth: boolean
     }
 
 }
@@ -35,7 +37,7 @@ const initialState = {
     isAuth: false
 }
 
-const authReducer = (state = initialState , action: authAT) => {
+const authReducer = (state = initialState , action: AppActionsType) => {
     switch (action.type) {
         case "SET_USER_DATA":
             return {
@@ -46,10 +48,10 @@ const authReducer = (state = initialState , action: authAT) => {
     }
 }
 
-export const setAuthUserData = (id: number, email: string, login: string): setUserDataAT => ({
+export const setAuthUserData = (id: number, email: string, login: string,isAuth:boolean): setUserDataAT => ({
     type: "SET_USER_DATA",
     data: {
-        id, email, login
+        id, email, login,isAuth
     }
 })
 

@@ -1,3 +1,5 @@
+import {AppActionsType} from "./reduxe-store";
+
 export type UsersACType =
     FollowType
     | UnFollowType
@@ -68,7 +70,7 @@ const InitialState: UsersInitialStateType = {
 };
 
 
-export const usersReducer = (state = InitialState, action: UsersACType): UsersInitialStateType => {
+export const usersReducer = (state = InitialState, action: AppActionsType): UsersInitialStateType => {
     switch (action.type) {
         case  FOLLOW:
             return {
