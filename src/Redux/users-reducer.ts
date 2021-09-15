@@ -1,4 +1,6 @@
 import {AppActionsType} from "./reduxe-store";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 export type UsersACType =
     FollowType
@@ -144,6 +146,16 @@ export const toggleIsFetching = (isFetching: boolean): ToggleIsFetching => ({typ
 export const toggleFollowingProgressAC = (isFetching: boolean,userId: number): FollowingProgress => ({
     type: "TOGGLE_IS_FOLLOWING_PROGRESS", isFetching,userId
 });
-
+export const getUsersThunkCreator = (currentPage:number,pageSize:number) => {
+   return (dispatch: Dispatch) => {
+        dispatch(toggleIsFetching(true))
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(toggleIsFetching(false))
+                dispatch(setUsers(data.items));
+                dispatch(setTotalUsersCount(data.totalCount));
+            });
+    }
+}
 
 export default usersReducer;

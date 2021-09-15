@@ -10,7 +10,7 @@ import {
     toggleIsFetching,
     unFollow,
     UserType,
-    progressFollowing
+    progressFollowing, getUsersThunkCreator
 } from "../../Redux/users-reducer";
 import {AppActionsType} from "../../Redux/Store";
 import Users from "./Users";
@@ -51,6 +51,7 @@ type UsersPropsType = {
     pageSize: number
     isFetching: boolean
     followingInProgress:[]
+    getUsersThunkCreator:
 }
 
 class UsersContainer extends React.Component<UsersPropsType, AppActionsType> {
@@ -88,6 +89,7 @@ class UsersContainer extends React.Component<UsersPropsType, AppActionsType> {
                 unFollow={this.props.unFollow}
                 toggleFollowingProgressAC={this.props.toggleFollowingProgressAC}
                 followingInProgress = {this.props.followingInProgress}
+                getUsersThunkCreator = {this.props.getUsersThunkCreator}
             />
         </>
     }
@@ -121,7 +123,8 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
 
 
 export default connect<mapStatePropsType, mapDispatchToProps, {}, AppStateType>(mapStateProps, {
-    follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching,toggleFollowingProgressAC
+    follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching,toggleFollowingProgressAC,
+    getUsersThunkCreator
 })(UsersContainer);
 
 
