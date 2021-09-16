@@ -14,11 +14,17 @@ export const usersAPI = {
             .then(response => {
                 return response.data
             })
-
+    },
+    follow(id:number){
+        return instanse.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
+    },
+    unfollow(id:number){
+        return instanse.delete(
+            `https://social-network.samuraijs.com/api/1.0/follow/${id}`)
     }
 }
 
-export const getUsers = (currentPage: number, pageSize: number) => {
+export const getUser = (currentPage: number, pageSize: number) => {
     return instanse.get(`users?page=${currentPage}&count=${pageSize}`)
         .then(response => {
             return response.data
@@ -27,6 +33,4 @@ export const getUsers = (currentPage: number, pageSize: number) => {
 }
 
 
-export const followUser = (id:string) =>{
-    instanse.post(baseUrl + `follow/${id}`)
-}
+
