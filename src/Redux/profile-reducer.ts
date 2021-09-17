@@ -1,4 +1,6 @@
 import {AppActionsType} from "./reduxe-store";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 export type AddPostActionType = {
     type: "ADD-POST",
@@ -9,6 +11,10 @@ export type ChangeNewPostTextActionType = {
 }
 export type SetUserProfileType = {
     type: "SET_USER_PROFILE"
+    user:ProfileType
+}
+export type GetUserProfileType = {
+    type: "GET_USER_PROFILE"
     user:ProfileType
 }
 
@@ -53,7 +59,7 @@ export type ProfileType = {
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
     fullName: string,
-    userId: number,
+    userId: number | null,
     photos: photoType
 }
 export type ProfileActionsType = AddPostActionType | ChangeNewPostTextActionType | SetUserProfileType
@@ -93,6 +99,11 @@ export const updateNewPostTextActionCreator = (newText: string): ChangeNewPostTe
     return {type: "UPDATE-NEW-POST-TEXT", newText: newText}
 }
 export const setUserProfileAC = (user: ProfileType):SetUserProfileType=> ({type: "SET_USER_PROFILE", user})
-
+export const getUserProfileThunkCreator = (userId: number) => (dispatch:Dispatch) => {
+    usersAPI.getProfile(userId)
+        .then(response => {
+           dispatch(setUserProfileAC(response.data));
+        })
+}
 
 export default profileReducer;

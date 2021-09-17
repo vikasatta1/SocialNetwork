@@ -1,5 +1,7 @@
 import React from "react";
 import {AppActionsType} from "./reduxe-store";
+import {Dispatch} from "redux";
+import {authAPI} from "../api/api";
 
 
 export type authAT = setUserDataAT
@@ -61,5 +63,15 @@ export const setAuthUserData = (id: number, email: string, login: string, isAuth
         id, email, login,isAuth
     }
 })
+
+export const getAuthUserDataThunkCreator = ( ) => (dispatch:Dispatch) => {
+    authAPI.me()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                let {id, email, login} = response.data.data;
+               dispatch(setAuthUserData(id, email, login, true));
+            }
+        });
+}
 
 export default authReducer;
