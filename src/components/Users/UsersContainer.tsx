@@ -13,6 +13,8 @@ import {AppActionsType} from "../../Redux/Store";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {compose} from "redux";
+import {deflate} from "zlib";
 
 type mapStatePropsType = {
     users: Array<UserType>
@@ -24,9 +26,7 @@ type mapStatePropsType = {
 }
 
 type mapDispatchToProps = {
-
     unFollowSuccess: (userId: number) => void
-
     getUsers:(currentPage:number,pageSize:number)=>void
     follow:(id: number)=> void
     unFollow:(id: number)=> void
@@ -99,10 +99,17 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
 
 
 
-export default WithAuthRedirect(connect<mapStatePropsType, mapDispatchToProps, {}, AppStateType>(mapStateProps, {follow,unFollow,
+/*export default WithAuthRedirect(connect<mapStatePropsType, mapDispatchToProps, {}, AppStateType>(mapStateProps, {follow,unFollow,
     unFollowSuccess,
     getUsers
-})(UsersContainer));
-
+})(UsersContainer));*/
+export default compose(
+    WithAuthRedirect,
+    connect<mapStatePropsType, mapDispatchToProps, {}, AppStateType>
+    (mapStateProps, {follow,unFollow,
+        unFollowSuccess,
+        getUsers
+    }
+    ))(UsersContainer)
 
 /*export default connect<mapStatePropsType, mapDispatchToProps, {}, AppStateType>(mapStateProps, mapDispatchToProps)(UsersContainer);*/
