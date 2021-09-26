@@ -23,16 +23,25 @@ export const usersAPI = {
             `follow/${id}`)
     },
     getProfile(userId: number) {
-        return instanse.get(`profile/${userId}`)
+     return profileAPI.getProfile(userId)
     }
 }
 
-/*export const getUser = (currentPage: number, pageSize: number) => {
-    return instanse.get(`users?page=${currentPage}&count=${pageSize}`)
-        .then(response => {
-            return response.data
+export const profileAPI = {
+    getProfile(userId: number) {
+        return instanse.get(`profile/${userId}`)
+    },
+    getStatus(userId:number) {
+        return instanse.get(`/profile/status${userId}`)
+    },
+    updateStatus(status:string,userId:number) {
+        return instanse.put(`/profile/status${userId}`, {
+            status:status
         })
-}*/
+    }
+}
+
+
 export const authAPI = {
     me() {
         return instanse.get(`auth/me`)
