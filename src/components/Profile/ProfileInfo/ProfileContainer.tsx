@@ -51,7 +51,7 @@ export default compose<React.ComponentType>(
     connect<mapStatePropsType, mapDispatchPropsType, OwnProps, AppStateType>
     (mapStateProps, {getUserProfileThunkCreator}),
     withRouter,
-    WithAuthRedirect
+   /* WithAuthRedirect*/
 )(ProfileContainer)
 
 
