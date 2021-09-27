@@ -40,7 +40,7 @@ class ProfileContainer extends React.Component<PropsType> {
             userId = 2;
         }
         this.props.getUserProfileThunkCreator(userId)
-            this.props.getStatusThunk(userId)
+        this.props.getStatusThunk(userId)
     }
 
     render() {

@@ -1,11 +1,11 @@
 import React from "react";
 
-
-type ProfileStatusProps = {
+type PropsType = {
+    updateStatus: (status: string) => void
     status: string
 }
 
-class ProfileStatus extends React.Component<any, any> {
+class ProfileStatus extends React.Component<PropsType> {
 
     state = {
         editMode: false,
@@ -23,18 +23,27 @@ class ProfileStatus extends React.Component<any, any> {
         });
         this.props.updateStatus(this.state.status)
     }
-    onStatusChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-     this.setState({
-         status: e.currentTarget.value
-     }) ;
-
+    onStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.currentTarget.value
+        });
     }
+
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+      if(prevProps.status !== this.props.status){
+        this.setState({
+            status: this.props.status
+        })}
+        let a = this.state
+        let b = this.props
+    }
+
     render() {
         return (
             <div>
                 {!this.state.editMode &&
                 <div>
-                    <span onDoubleClick={this.activatedEditMode}>{this.props.status || "Hello Vika" }</span>
+                    <span onDoubleClick={this.activatedEditMode}>{this.props.status || "Hello Vika"}</span>
                 </div>}
                 {this.state.editMode &&
                 <div>
