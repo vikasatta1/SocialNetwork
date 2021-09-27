@@ -148,7 +148,7 @@ export const getStatusThunk = (userId: number) => (dispatch:Dispatch) => {
             dispatch(setStatusAC(response.data))
         })
 }
-export const updateStatusThunk = (status:string) => (dispatch:Dispatch) => {
+export const updateStatus = (status:string) => (dispatch:Dispatch) => {
     profileAPI.updateStatus(status)
         .then(response => {
             if (response.data.resultCode === 0) {

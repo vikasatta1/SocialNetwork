@@ -43,6 +43,26 @@ type DialogsType = {
 export type DialogsActionType = UpdateNewMessageBodyType | SendMessageType
 
 const dialogsReducer = (state = initialState, action: AppActionsType): dialogPageType  => {
+  /*  switch (action.type) {
+        case "UPDATE-NEW-MESSAGE-BODY":{
+            return {
+                ...state,
+                newMessageBody: action.body
+        }
+        case "SEND_MESSAGE"{
+                const body = state.newMessageBody;
+                debugger
+                return {
+                    ...state,
+                    newMessageBody: "",
+                    messages: [...state.messages, {id: state.messages.length, message: body}]
+                };
+            }
+        }
+        default:
+            return state
+    }*/
+
     if (action.type === "UPDATE-NEW-MESSAGE-BODY" ){
         return {
             ...state,

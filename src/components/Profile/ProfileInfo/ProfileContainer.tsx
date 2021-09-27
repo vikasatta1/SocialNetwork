@@ -5,13 +5,12 @@ import {
     getStatusThunk,
     getUserProfileThunkCreator,
     ProfileType,
-    updateStatusThunk
+    updateStatus
 } from "../../../Redux/profile-reducer";
 import {RouteComponentProps, withRouter} from 'react-router';
 import Profile from "../Profile";
-import {WithAuthRedirect} from "../../../hoc/WithAuthRedirect";
-import {compose} from "redux";
 
+import {compose} from "redux";
 
 
 type OwnProps = {}
@@ -25,9 +24,9 @@ type mapStatePropsType = {
     status: string
 }
 type mapDispatchPropsType = {
-    getUserProfileThunkCreator: ( userId: number) => void
-    getStatus:(userId:number) => void
-    updateStatusThunk:(status:string) => void
+    getUserProfileThunkCreator: (userId: number) => void
+    getStatusThunk: (userId: number) => void
+    updateStatus: (status: string) => void
 }
 
 // @ts-ignore
@@ -41,18 +40,21 @@ class ProfileContainer extends React.Component<PropsType> {
             userId = 2;
         }
         this.props.getUserProfileThunkCreator(userId)
-        this.props.getStatus(userId)
+            this.props.getStatusThunk(userId)
     }
 
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile}
-                     status = {this.props.status}
-                     updateStatusThunk={this.props.updateStatusThunk}/>
+            <Profile {...this.props}
+                     profile={this.props.profile}
+                     status={this.props.status}
+                     updateStatus={this.props.updateStatus}
+            />
 
         )
     }
 }
+
 const mapStateProps = (state: AppStateType): mapStatePropsType => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status
@@ -61,9 +63,9 @@ const mapStateProps = (state: AppStateType): mapStatePropsType => ({
 
 export default compose<React.ComponentType>(
     connect<mapStatePropsType, mapDispatchPropsType, OwnProps, AppStateType>
-    (mapStateProps, {getUserProfileThunkCreator,getStatus,updateStatusThunk}),
+    (mapStateProps, {getUserProfileThunkCreator, getStatusThunk, updateStatus}),
     withRouter,
-   /* WithAuthRedirect*/
+    /* WithAuthRedirect*/
 )(ProfileContainer)
 
 
