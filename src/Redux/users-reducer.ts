@@ -52,10 +52,7 @@ export type PhotosType = {
     small: null | string
     large: null | string
 };
-type UsersLocation = {
-    city: string
-    country: string
-};
+
 export type progressFollowing = {
     isFetching: boolean
     userId: number
@@ -124,7 +121,7 @@ export const usersReducer = (state = InitialState, action: AppActionsType): User
             // @ts-ignore
             return {...state, followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id != action.userId)
+                    : state.followingInProgress.filter(id => id !== action.userId)
             }
         }
         default:

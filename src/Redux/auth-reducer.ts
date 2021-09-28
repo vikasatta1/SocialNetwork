@@ -1,9 +1,6 @@
-import React from "react";
 import {AppActionsType} from "./reduxe-store";
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
-
-
 export type authAT = setUserDataAT
 type setUserDataAT = {
     type: "SET_USER_DATA",
@@ -15,23 +12,6 @@ type setUserDataAT = {
     }
 
 }
-type authStateType = {
-    userId: null | number,
-    email:null | string,
-    login: null | string
-};
-
-type Api = {
-    data: {
-        id: number,
-        login: string,
-        email: string
-    },
-    messages: [],
-    fieldsErrors: [],
-    resultCode: number
-}
-
 const initialState = {
     id: null as number | null,
     email: null as string | null,
