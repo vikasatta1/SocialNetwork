@@ -1,10 +1,6 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
-type LoginFormPropsType = {
-    handleSubmit: () => void
-}
-
 type FormDataType = {
     login: string
     password: string

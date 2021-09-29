@@ -11,7 +11,7 @@ type MapStatePropsType = {
     dialogsPage: dialogPageType
 }
 type MapDispatchPropsType = {
-    sendMessage: () => void
+    sendMessage: (newMessageBody:string) => void
     updateNewMessageBody: (body: string) => void
 }
 export type DialogsPropsType = MapDispatchPropsType & MapStatePropsType
@@ -23,7 +23,7 @@ const mapStateProps = (state: AppStateType): MapStatePropsType => {
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
-        sendMessage: () => dispatch(sendMessageCreator()),
+        sendMessage: (newMessageBody:string) => dispatch(sendMessageCreator(newMessageBody)),
         updateNewMessageBody: (body: string) => dispatch(updateNewMessageBodyCreator(body))
     }
 }

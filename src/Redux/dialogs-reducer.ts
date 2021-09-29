@@ -1,11 +1,14 @@
 import {AppActionsType} from "./Store";
 
 export type UpdateNewMessageBodyType = {
-    type:"UPDATE-NEW-MESSAGE-BODY",
-    body:string
+    type: "UPDATE-NEW-MESSAGE-BODY",
+    body: string
 }
+const Update = "UPDATE-NEW-MESSAGE-BODY"
+const Send = "SEND_MESSAGE"
 export type SendMessageType = {
-    type:"SEND_MESSAGE"
+    type: "SEND_MESSAGE",
+    newMessageBody:string
 }
 const initialState = {
     messages: [
@@ -34,7 +37,7 @@ type DialogsType = {
     id: number
     name: string
 }
- export type dialogPageType = {
+export type dialogPageType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
     newMessageBody: string
@@ -42,15 +45,15 @@ type DialogsType = {
 
 export type DialogsActionType = UpdateNewMessageBodyType | SendMessageType
 
-const dialogsReducer = (state = initialState, action: AppActionsType): dialogPageType  => {
-  /*  switch (action.type) {
-        case "UPDATE-NEW-MESSAGE-BODY":{
+const dialogsReducer = (state = initialState, action: AppActionsType): dialogPageType => {
+    switch (action.type) {
+        case Update: {
             return {
                 ...state,
                 newMessageBody: action.body
-        }
-        case "SEND_MESSAGE"{
-                const body = state.newMessageBody;
+            }}
+        case Send:{
+                const body = action.newMessageBody;
                 debugger
                 return {
                     ...state,
@@ -58,12 +61,12 @@ const dialogsReducer = (state = initialState, action: AppActionsType): dialogPag
                     messages: [...state.messages, {id: state.messages.length, message: body}]
                 };
             }
-        }
+
         default:
             return state
-    }*/
+    }
 
-    if (action.type === "UPDATE-NEW-MESSAGE-BODY" ){
+    /*if (action.type === Update ){
         return {
             ...state,
             newMessageBody: action.body
@@ -77,14 +80,15 @@ const dialogsReducer = (state = initialState, action: AppActionsType): dialogPag
             messages: [...state.messages, {id: state.messages.length, message: body}]
         };
     }
-    return state
+    return state*/
 }
 
 
-export const sendMessageCreator = ():SendMessageType => {
-    return { type:"SEND_MESSAGE"}
+export const sendMessageCreator = (newMessageBody:string): SendMessageType => {
+    return {type: "SEND_MESSAGE",newMessageBody}
 }
-export const updateNewMessageBodyCreator = ( body:string):UpdateNewMessageBodyType => {
-    return {type:"UPDATE-NEW-MESSAGE-BODY", body:body}}
+export const updateNewMessageBodyCreator = (body: string): UpdateNewMessageBodyType => {
+    return {type: "UPDATE-NEW-MESSAGE-BODY", body: body}
+}
 
 export default dialogsReducer;

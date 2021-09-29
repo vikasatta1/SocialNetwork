@@ -16,11 +16,14 @@ const Dialogs = (props: DialogsPropsType) => {
     const messagesElements = state.messages.map( m => <Message key={m.id} message={m.message}/>);
     const newMessageBody = state.newMessageBody;
     const onSendMessageBody = () => {
-        props.sendMessage();
+
     }
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const body = e.target.value;
         props.updateNewMessageBody(body);
+    }
+    const addNewMessage = (value:any) => {
+        props.sendMessage(value.newMessageBody);
     }
     return (
         <div className={s.dialogs}>
@@ -29,7 +32,6 @@ const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={s.messages}>
                 <div> {messagesElements} </div>
-                <form>
                     {/*<div><textarea
                             value={newMessageBody}
                             onChange={onNewMessageChange}
@@ -38,9 +40,9 @@ const Dialogs = (props: DialogsPropsType) => {
                     </div>
                     <div><button onClick={onSendMessageBody}>Send</button>
                     </div>*/}
-                </form>
-                <AddMessageFormRedux/>
+                <AddMessageFormRedux onSubmit={addNewMessage}/>
             </div>
+
         </div>)
 }
 
@@ -49,7 +51,10 @@ const AddMessageForm = (props:any) => {
     return (
         <form onSubmit = {props.handleSubmit}>
             <div>
-                <Field component={'textarea'} name={'newMessageBody'} placeholder={'Enter your message'}/>
+                <Field component={'textarea'}
+                       name={'newMessageBody'}
+                       placeholder={'Enter your message'}
+                />
             </div>
             <div><button>Send</button>
             </div>
@@ -57,5 +62,6 @@ const AddMessageForm = (props:any) => {
     )
 }
 
-const AddMessageFormRedux = reduxForm({form: "dialogAddMessageForm"})(AddMessageForm)
+const AddMessageFormRedux = reduxForm({
+    form: "dialogAddMessageForm"})(AddMessageForm)
 export default Dialogs;
