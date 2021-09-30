@@ -17,9 +17,6 @@ const ProfileInfo = (props:ProfileInfoType) => {
 
     return (
         <div>
-            {/*<div>
-                <img src={'https://wallpaperscave.ru/images/thumbs/wp-preview/800x500/18/04-07/tv-series-rick-and-morty-38325.jpg'}/>
-            </div>*/}
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large}/>
                <ProfileStatus

@@ -4,6 +4,7 @@ import {profileAPI, usersAPI} from "../api/api";
 
 export type AddPostActionType = {
     type: "ADD-POST",
+    newPostText: string
 }
 export type ChangeNewPostTextActionType = {
     type: "UPDATE-NEW-POST-TEXT",
@@ -24,7 +25,6 @@ const initialState = {
         {id: 1, message: "Hi, how are you?", likesCount: 12},
         {id: 2, message: "it's my first post", likesCount: 11},
     ],
-    newPostText: "",
     status: ""
 }
 
@@ -36,7 +36,6 @@ export type PostsType = {
 export type profilePageType = {
     profile: ProfileType | null
     posts: Array<PostsType>
-    newPostText: string
     status: string
 }
 
@@ -71,84 +70,53 @@ export type ProfileActionsType =
     | SetStatus
 
 const profileReducer = (state: profilePageType = initialState, action: AppActionsType): profilePageType => {
-
-
-
-
-    if (action.type === "ADD-POST") {          /// если у экшена тип равен адд - сделаем логику добавления поста
-        const newPost: PostsType = {
-            id: new Date().getTime(),
-            message: state.newPostText,
-            likesCount: 0
-        };
-        return {
-            ...state,
-            posts: [...state.posts, newPost],
-            newPostText: ""
-        };
-    } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-        return {
-            ...state,
-            newPostText: action.newText
-        }; // иначе если тип равет
-    } else if (action.type === "SET_USER_PROFILE") {
-        return {
-            ...state,
-            profile: action.user
-        }; // иначе если тип равет
-    }
-    else if (action.type === "SET_STATUS"){
-        return {
-            ...state,
-            status:action.status
-        }
-    }
-    return state;
-
-    /*switch (action.type) {
+    switch (action.type) {
         case "ADD-POST": {
             const newPost: PostsType = {
                 id: new Date().getTime(),
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             };
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ""
             };
         }
-        case "UPDATE-NEW-POST-TEXT":
-        return {
-            ...state,
-            newPostText: action.newText
-        }
-    }*/
+        case "SET_USER_PROFILE":
+            return {
+                ...state,
+                profile: action.user
+            }
+        case "SET_STATUS":
+            return {
+                ...state,
+                status: action.status
+            }
+        default:
+            return state
+    }
 
 }
 
 
-export const addPostActionCreator = (): AddPostActionType => {          //возвращает action
-    return {type: "ADD-POST"}
-}
-export const updateNewPostTextActionCreator = (newText: string): ChangeNewPostTextActionType => {
-    return {type: "UPDATE-NEW-POST-TEXT", newText: newText}
+export const addPostActionCreator = (newPostText: string): AddPostActionType => {          //возвращает action
+    return {type: "ADD-POST", newPostText}
 }
 export const setUserProfileAC = (user: ProfileType): SetUserProfileType => ({type: "SET_USER_PROFILE", user})
-export const setStatusAC = (status:string): SetStatus => ({type: "SET_STATUS", status})
+export const setStatusAC = (status: string): SetStatus => ({type: "SET_STATUS", status})
 export const getUserProfileThunkCreator = (userId: number) => (dispatch: Dispatch) => {
     usersAPI.getProfile(userId)
         .then(response => {
             dispatch(setUserProfileAC(response.data));
         })
 }
-export const getStatusThunk = (userId: number) => (dispatch:Dispatch) => {
+export const getStatusThunk = (userId: number) => (dispatch: Dispatch) => {
     profileAPI.getStatus(userId)
         .then(response => {
             dispatch(setStatusAC(response.data))
         })
 }
-export const updateStatus = (status:string) => (dispatch:Dispatch) => {
+export const updateStatus = (status: string) => (dispatch: Dispatch) => {
     profileAPI.updateStatus(status)
         .then(response => {
             if (response.data.resultCode === 0) {

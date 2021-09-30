@@ -1,10 +1,5 @@
 import {AppActionsType} from "./Store";
 
-export type UpdateNewMessageBodyType = {
-    type: "UPDATE-NEW-MESSAGE-BODY",
-    body: string
-}
-const Update = "UPDATE-NEW-MESSAGE-BODY"
 const Send = "SEND_MESSAGE"
 export type SendMessageType = {
     type: "SEND_MESSAGE",
@@ -17,7 +12,6 @@ const initialState = {
         {id: 3, message: "How are you"},
         {id: 4, message: "Yo"},
         {id: 5, message: "Yo"},
-        {id: 6, message: "Yo"}
     ],
     dialogs: [
         {id: 1, name: "Рик Санчез"},
@@ -43,52 +37,23 @@ export type dialogPageType = {
     newMessageBody: string
 }
 
-export type DialogsActionType = UpdateNewMessageBodyType | SendMessageType
+export type DialogsActionType = SendMessageType
 
 const dialogsReducer = (state = initialState, action: AppActionsType): dialogPageType => {
     switch (action.type) {
-        case Update: {
-            return {
-                ...state,
-                newMessageBody: action.body
-            }}
         case Send:{
                 const body = action.newMessageBody;
-                debugger
                 return {
                     ...state,
-                    newMessageBody: "",
                     messages: [...state.messages, {id: state.messages.length, message: body}]
                 };
             }
-
         default:
             return state
     }
-
-    /*if (action.type === Update ){
-        return {
-            ...state,
-            newMessageBody: action.body
-        };
-    } else if (action.type === "SEND_MESSAGE" ){
-        const body = state.newMessageBody;
-        debugger
-        return {
-            ...state,
-            newMessageBody: "",
-            messages: [...state.messages, {id: state.messages.length, message: body}]
-        };
-    }
-    return state*/
 }
-
 
 export const sendMessageCreator = (newMessageBody:string): SendMessageType => {
     return {type: "SEND_MESSAGE",newMessageBody}
 }
-export const updateNewMessageBodyCreator = (body: string): UpdateNewMessageBodyType => {
-    return {type: "UPDATE-NEW-MESSAGE-BODY", body: body}
-}
-
 export default dialogsReducer;
