@@ -8,7 +8,7 @@ export type AddPostActionType = {
 }
 export type ChangeNewPostTextActionType = {
     type: "UPDATE-NEW-POST-TEXT",
-    newText: string
+    newPostText: string
 }
 export type SetUserProfileType = {
     type: "SET_USER_PROFILE"
@@ -25,6 +25,7 @@ const initialState = {
         {id: 1, message: "Hi, how are you?", likesCount: 12},
         {id: 2, message: "it's my first post", likesCount: 11},
     ],
+    newPostText:'',
     status: ""
 }
 
@@ -37,6 +38,7 @@ export type profilePageType = {
     profile: ProfileType | null
     posts: Array<PostsType>
     status: string
+    newPostText:string | null
 }
 
 type contactType = {
