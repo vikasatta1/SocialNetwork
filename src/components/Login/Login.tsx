@@ -2,11 +2,17 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/FormsControl/FormsControl";
 import {required} from "../../utils/validators/validators";
+import {connect} from "react-redux";
+import {loginThunkCreator} from "../../Redux/auth-reducer";
+import {Redirect} from "react-router-dom";
+import {AppStateType} from "../../Redux/reduxe-store";
+import styles from "../common/FormsControl/FormControls.module.css"
 
 type FormDataType = {
     login: string
     password: string
-    rememberMe: string
+    rememberMe: boolean
+    email: string
 }
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
@@ -14,8 +20,8 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field
-                    placeholder={'Login'}
-                    name={'login'}
+                    placeholder={'Email'}
+                    name={'email'}
                     component={Input}
                     validate={[required]}
                 />
@@ -24,6 +30,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field
                     placeholder={'Password'}
                     name={'password'}
+                    type={'password'}
                     component={Input}
                     validate={[required]}
                 />
@@ -36,6 +43,9 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                     validate={[required]}
                 /> remember me
             </div>
+            {props.error && <div className={styles.formSummaryError}>
+                {props.error}
+            </div>}
             <div>
                 <button>
                     Login
@@ -47,10 +57,14 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
-const Login = () => {
+const Login = (props: any) => {
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        props.loginThunkCreator(formData.email, formData.password, formData.rememberMe)
     }
+    if (props.isAuth) {
+        return <Redirect to={'profile'}/>
+    }
+
     return (
         <div>
             <h1>Login</h1>
@@ -58,5 +72,7 @@ const Login = () => {
         </div>
     );
 };
-
-export default Login;
+const mapStateToProps = (state: AppStateType) => ({
+        isAuth: state.auth.isAuth
+})
+export default connect(mapStateToProps, {loginThunkCreator})(Login);

@@ -1,6 +1,7 @@
 import {AppActionsType} from "./reduxe-store";
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 export type authAT = setUserDataAT
 type setUserDataAT = {
     type: "SET_USER_DATA",
@@ -29,10 +30,10 @@ const authReducer = (state = initialState , action: AppActionsType): initAuthSta
                 id: action.data.id,
                 email: action.data.email,
                 login: action.data.login,
-                isAuth: true
+                isAuth: action.data.isAuth
             }
         default: {
-            return state
+            return state;
         }
     }
 }
@@ -53,5 +54,31 @@ export const getAuthUserDataThunkCreator = ( ) => (dispatch:Dispatch) => {
             }
         });
 }
+
+export const loginThunkCreator = (email:string,password:string, rememberMe:boolean ) => (dispatch:Dispatch) => {
+
+
+
+    authAPI.login(email,password,rememberMe)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                // @ts-ignore
+                dispatch(getAuthUserDataThunkCreator())
+            } else {
+                dispatch(stopSubmit("login", {_error:"Common error"}))
+            }
+        });
+}
+export const logoutThunkCreator = ( ) => (dispatch:Dispatch) => {
+    authAPI.logout()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                // @ts-ignore
+                dispatch(getAuthUserDataThunkCreator(null,null,null,false))
+            }
+        });
+}
+
+
 
 export default authReducer;

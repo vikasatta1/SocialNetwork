@@ -2,7 +2,7 @@ import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {getAuthUserDataThunkCreator} from "../../Redux/auth-reducer";
+import {getAuthUserDataThunkCreator, logoutThunkCreator} from "../../Redux/auth-reducer";
 import {AppStateType} from "../../Redux/reduxe-store";
 import {RouteComponentProps, withRouter} from "react-router";
 
@@ -20,6 +20,7 @@ type mapStatePropsType = {
 }
 type mapDispatchPropsType = {
     getAuthUserDataThunkCreator:()=>void
+    logoutThunkCreator:()=>void
 }
 export type HeaderPropsType = mapDispatchPropsType & mapStatePropsType
 type OwnPropsType = mapStatePropsType & mapDispatchPropsType
@@ -44,4 +45,4 @@ const mapStateProps = (state: AppStateType): mapStatePropsType => ({
 })
 let withUrlDataContainerComponent = withRouter(HeaderContainer)
 export default connect<mapStatePropsType, mapDispatchPropsType, OwnProps, AppStateType>
-(mapStateProps, {getAuthUserDataThunkCreator})(withUrlDataContainerComponent);
+(mapStateProps, {getAuthUserDataThunkCreator,logoutThunkCreator})(withUrlDataContainerComponent);
