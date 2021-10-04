@@ -15,17 +15,20 @@ import {compose} from "redux";
 
 type OwnProps = {}
 type PathParamsType = {
-    userId: number
+    userId: number | null
 }
 type OwnPropsType = mapStatePropsType & mapDispatchPropsType
 
 type mapStatePropsType = {
     profile: ProfileType | null
     status: string
+    authorizedUserId:number | null
+    isAuth:boolean
+
 }
 type mapDispatchPropsType = {
-    getUserProfileThunkCreator: (userId: number) => void
-    getStatusThunk: (userId: number) => void
+    getUserProfileThunkCreator: (userId: number | null) => void
+    getStatusThunk: (userId: number | null) => void
     updateStatus: (status: string) => void
 }
 
@@ -37,7 +40,7 @@ class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = 2;
+            userId = this.props.authorizedUserId;
         }
         this.props.getUserProfileThunkCreator(userId)
         this.props.getStatusThunk(userId)
@@ -57,7 +60,9 @@ class ProfileContainer extends React.Component<PropsType> {
 
 const mapStateProps = (state: AppStateType): mapStatePropsType => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth,
 });
 
 

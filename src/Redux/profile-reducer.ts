@@ -106,13 +106,13 @@ export const addPostActionCreator = (newPostText: string): AddPostActionType => 
 }
 export const setUserProfileAC = (user: ProfileType): SetUserProfileType => ({type: "SET_USER_PROFILE", user})
 export const setStatusAC = (status: string): SetStatus => ({type: "SET_STATUS", status})
-export const getUserProfileThunkCreator = (userId: number) => (dispatch: Dispatch) => {
+export const getUserProfileThunkCreator = (userId: any) => (dispatch: Dispatch) => {
     usersAPI.getProfile(userId)
         .then(response => {
             dispatch(setUserProfileAC(response.data));
         })
 }
-export const getStatusThunk = (userId: number) => (dispatch: Dispatch) => {
+export const getStatusThunk = (userId: any) => (dispatch: Dispatch) => {
     profileAPI.getStatus(userId)
         .then(response => {
             dispatch(setStatusAC(response.data))

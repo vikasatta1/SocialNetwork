@@ -6,7 +6,7 @@ export type authAT = setUserDataAT
 type setUserDataAT = {
     type: "SET_USER_DATA",
     data: {
-        id: number,
+        userId: number | null,
         email: string,
         login: string,
         isAuth: boolean
@@ -14,7 +14,7 @@ type setUserDataAT = {
 
 }
 const initialState = {
-    id: null as number | null,
+    userId: null as number | null,
     email: null as string | null,
     login: null as string | null,
     isAuth: false
@@ -27,7 +27,7 @@ const authReducer = (state = initialState , action: AppActionsType): initAuthSta
             return {
                 ...state,
                 //...action.data,
-                id: action.data.id,
+                userId: action.data.userId,
                 email: action.data.email,
                 login: action.data.login,
                 isAuth: action.data.isAuth
@@ -38,10 +38,10 @@ const authReducer = (state = initialState , action: AppActionsType): initAuthSta
     }
 }
 
-export const setAuthUserData = (id: number, email: string, login: string, isAuth: boolean): setUserDataAT => ({
+export const setAuthUserData = (userId: number | null, email: string, login: string, isAuth: boolean): setUserDataAT => ({
     type: "SET_USER_DATA",
     data: {
-        id, email, login,isAuth
+        userId, email, login,isAuth
     }
 })
 
@@ -56,16 +56,14 @@ export const getAuthUserDataThunkCreator = ( ) => (dispatch:Dispatch) => {
 }
 
 export const loginThunkCreator = (email:string,password:string, rememberMe:boolean ) => (dispatch:Dispatch) => {
-
-
-
     authAPI.login(email,password,rememberMe)
         .then(response => {
             if (response.data.resultCode === 0) {
                 // @ts-ignore
                 dispatch(getAuthUserDataThunkCreator())
             } else {
-                dispatch(stopSubmit("login", {_error:"Common error"}))
+               let messages = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
+                dispatch(stopSubmit("login", {_error:messages}))
             }
         });
 }
