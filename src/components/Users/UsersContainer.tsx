@@ -2,13 +2,22 @@ import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/reduxe-store";
 import {
-    UserType, getUsers, unFollowSuccess, follow, unFollow,
+    UserType, requestUsers, unFollowSuccess, follow, unFollow,
 } from "../../Redux/users-reducer";
 import {AppActionsType} from "../../Redux/Store";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getTotalUsersCount,
+    setPageSize,
+    setUsers
+} from "../../Redux/users-selectors";
+import {stat} from "fs";
 
 
 type mapStatePropsType = {
@@ -64,7 +73,7 @@ class UsersContainer extends React.Component<UsersPropsType, AppActionsType> {
     }
 }
 
-const mapStateProps = (state: AppStateType): mapStatePropsType => {
+/*const mapStateProps = (state: AppStateType): mapStatePropsType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -73,7 +82,17 @@ const mapStateProps = (state: AppStateType): mapStatePropsType => {
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress
     }
+}*/
+const mapStateProps = (state: AppStateType): mapStatePropsType => {
+    return {
+        users: setUsers(state),
+        pageSize: setPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
+    }
 }
 export default compose(
     connect<mapStatePropsType, mapDispatchToProps, {}, AppStateType>
-    (mapStateProps, {follow, unFollow, unFollowSuccess, getUsers}))(UsersContainer)
+    (mapStateProps, {follow, unFollow, unFollowSuccess, getUsers: requestUsers}))(UsersContainer)
