@@ -9,7 +9,6 @@ import {
 } from "../../../Redux/profile-reducer";
 import {RouteComponentProps, withRouter} from 'react-router';
 import Profile from "../Profile";
-
 import {compose} from "redux";
 
 
@@ -18,29 +17,28 @@ type PathParamsType = {
     userId: number | null
 }
 type OwnPropsType = mapStatePropsType & mapDispatchPropsType
-
 type mapStatePropsType = {
     profile: ProfileType | null
     status: string
-    authorizedUserId:number | null
-    isAuth:boolean
-
+    authorizedUserId: number | null
+    isAuth: boolean
 }
 type mapDispatchPropsType = {
     getUserProfileThunkCreator: (userId: number | null) => void
     getStatusThunk: (userId: number | null) => void
     updateStatus: (status: string) => void
 }
-
 // @ts-ignore
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 class ProfileContainer extends React.Component<PropsType> {
-
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.authorizedUserId;
+            if(!userId){
+                this.props.history.push('/login')
+            }
         }
         this.props.getUserProfileThunkCreator(userId)
         this.props.getStatusThunk(userId)
@@ -53,7 +51,6 @@ class ProfileContainer extends React.Component<PropsType> {
                      status={this.props.status}
                      updateStatus={this.props.updateStatus}
             />
-
         )
     }
 }
@@ -64,19 +61,9 @@ const mapStateProps = (state: AppStateType): mapStatePropsType => ({
     authorizedUserId: state.auth.userId,
     isAuth: state.auth.isAuth,
 });
-
-
 export default compose<React.ComponentType>(
     connect<mapStatePropsType, mapDispatchPropsType, OwnProps, AppStateType>
     (mapStateProps, {getUserProfileThunkCreator, getStatusThunk, updateStatus}),
     withRouter,
     /* WithAuthRedirect*/
 )(ProfileContainer)
-
-
-/*
-let AuthRedirectComponent = WithAuthRedirect(ProfileContainer)
-let withUrlDataContainerComponent = withRouter(AuthRedirectComponent)
-export default connect<mapStatePropsType, mapDispatchPropsType, OwnProps, AppStateType>
-(mapStateProps, {getUserProfileThunkCreator})(withUrlDataContainerComponent);
-*/

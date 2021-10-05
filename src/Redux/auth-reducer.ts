@@ -53,6 +53,7 @@ export const getAuthUserDataThunkCreator = ( ) => (dispatch:Dispatch) => {
                dispatch(setAuthUserData(id, email, login, true));
             }
         });
+    return "brgf"
 }
 
 export const loginThunkCreator = (email:string,password:string, rememberMe:boolean ) => (dispatch:Dispatch) => {
