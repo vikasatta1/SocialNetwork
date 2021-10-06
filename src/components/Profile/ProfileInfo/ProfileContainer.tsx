@@ -36,7 +36,7 @@ class ProfileContainer extends React.Component<PropsType> {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.authorizedUserId;
-            if(!userId){
+            if (!userId) {
                 this.props.history.push('/login')
             }
         }
@@ -55,12 +55,14 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 }
 
-const mapStateProps = (state: AppStateType): mapStatePropsType => ({
-    profile: state.profilePage.profile,
-    status: state.profilePage.status,
-    authorizedUserId: state.auth.userId,
-    isAuth: state.auth.isAuth,
-});
+const mapStateProps = (state: AppStateType): mapStatePropsType => {
+    return ({
+        profile: state.profilePage.profile,
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.userId,
+        isAuth: state.auth.isAuth,
+    })
+}
 export default compose<React.ComponentType>(
     connect<mapStatePropsType, mapDispatchPropsType, OwnProps, AppStateType>
     (mapStateProps, {getUserProfileThunkCreator, getStatusThunk, updateStatus}),
