@@ -4,33 +4,19 @@ import Post from "./Post/Post";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import TextArea from "../../common/FormsControl/FormsControl";
+import {PostsType} from "../../../Redux/profile-reducer";
 
-import {RouteComponentProps} from "react-router";
-
-export type PostsPropsType = {
-    id: number
-    message: string
-    likesCount: number
+type MyPostType = {
+    posts: Array<PostsType>
+    addPost:(newPostText:string) => void
 }
 type FormDataType = {
-    newPostText:string
+    newPostText: string
 }
 const maxLength = maxLengthCreator(10)
-type PathParamsType = {
-
-}
-type OwnPropsType = mapStatePropsType & mapDispatchPropsType
-type mapStatePropsType = {
-    posts: Array<PostsPropsType>
-    addPost: (newPostText:string) => void
-}
-type mapDispatchPropsType = {
-
-}
-type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
-const addNewPostForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
-    return(
-        <form onSubmit = {props.handleSubmit}>
+const addNewPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
             <div>
                 <Field
                     name={'newPostText'}
@@ -45,35 +31,31 @@ const addNewPostForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
     )
 }
 const AddPostFormRedux = reduxForm<FormDataType>({
-    form: "ProfileAddNewPostForm"})(addNewPostForm)
+    form: "ProfileAddNewPostForm"
+})(addNewPostForm)
 
-class MyPosts extends React.Component<PropsType> {
-shouldComponentUpdate(nextProps: Readonly<PropsType>, nextState: Readonly<{}>, nextContext: any): boolean {
-    return nextProps != this.props && nextState != this.state;
-}
 
-    render() {
-        const postsElements =
-            this.props.posts.map((p: { message: string; likesCount: number; }) => <Post message={p.message} likesCount={p.likesCount}/>)
-        const newPostElement = React.createRef<HTMLTextAreaElement>();
-        let onAddPost = (values:any) => {
-            if (newPostElement.current !== null) {
-                this.props.addPost(values.newPostText);
-            }
-        };
-        return (
-            <div className={s.postsBlock}>
-                <h3>My posts</h3>
-                <AddPostFormRedux onSubmit={onAddPost}/>
-                <div className={s.posts}>
-                    {postsElements}
-                </div>
+
+const MyPosts = React.memo((props:MyPostType) =>{
+    const postsElements =
+        props.posts.map((p: { message: string; likesCount: number; }) => <Post message={p.message}
+                                                                               likesCount={p.likesCount}/>)
+    const newPostElement = React.createRef<HTMLTextAreaElement>();
+    let onAddPost = (values: any) => {
+        if (newPostElement.current !== null) {
+            props.addPost(values.newPostText);
+        }
+    };
+    return (
+        <div className={s.postsBlock}>
+            <h3>My posts</h3>
+            <AddPostFormRedux onSubmit={onAddPost}/>
+            <div className={s.posts}>
+                {postsElements}
             </div>
-        );
-    }
-
-
-}
+        </div>
+    );
+})
 
 
 export default MyPosts;
