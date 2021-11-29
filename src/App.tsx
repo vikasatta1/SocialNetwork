@@ -10,13 +10,10 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileInfo/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-
 import {RouteComponentProps, withRouter} from "react-router";
 import {connect} from "react-redux";
 import {AppStateType} from "./Redux/reduxe-store";
-import {getAuthUserDataThunkCreator} from "./Redux/auth-reducer";
 import {compose} from "redux";
-import {getStatusThunk, getUserProfileThunkCreator, updateStatus} from "./Redux/profile-reducer";
 import {initializeApp} from "./Redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 
