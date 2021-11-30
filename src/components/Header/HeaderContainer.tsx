@@ -38,7 +38,8 @@ class HeaderContainer extends React.Component<PropsType> {
 
 const mapStateProps = (state: AppStateType): mapStatePropsType => ({
     isAuth: state.auth.isAuth,
-    login: state.auth.login
+    login: state.auth.login,
+
 })
 let withUrlDataContainerComponent = withRouter(HeaderContainer)
 export default connect<mapStatePropsType, mapDispatchPropsType, OwnProps, AppStateType>

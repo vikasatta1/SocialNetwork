@@ -10,7 +10,7 @@ const initialState = {
         {id: 1, message: "Hi, how are you?", likesCount: 12},
         {id: 2, message: "it's my first post", likesCount: 11},
     ],
-    newPostText:'',
+    newPostText: '',
     status: ""
 }
 const profileReducer = (state: profilePageType = initialState, action: AppActionsType): profilePageType => {
@@ -39,7 +39,7 @@ const profileReducer = (state: profilePageType = initialState, action: AppAction
         case "DELETE_POST":
             return {
                 ...state,
-                posts: state.posts.filter(p=> p.id != action.postId)
+                posts: state.posts.filter(p => p.id != action.postId)
             }
         default:
             return state
@@ -60,19 +60,15 @@ export const getUserProfileThunkCreator = (userId: any) => (dispatch: Dispatch) 
             dispatch(setUserProfileAC(response.data));
         })
 }
-export const getStatusThunk = (userId: any) => (dispatch: Dispatch) => {
-    profileAPI.getStatus(userId)
-        .then(response => {
-            dispatch(setStatusAC(response.data))
-        })
+export const getStatusThunk = (userId: any) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.getStatus(userId);
+    dispatch(setStatusAC(response.data))
 }
-export const updateStatus = (status: string) => (dispatch: Dispatch) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
+export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+    let response = await   profileAPI.updateStatus(status)
             if (response.data.resultCode === 0) {
-                dispatch(setStatusAC(response.data))
+                dispatch(setStatusAC(status))
             }
-        })
 }
 export type AddPostActionType = {
     type: "ADD-POST",
@@ -92,7 +88,6 @@ export type SetStatus = {
 }
 
 
-
 export type PostsType = {
     id: number
     message: string
@@ -102,7 +97,7 @@ export type profilePageType = {
     profile: ProfileType | null
     posts: Array<PostsType>
     status: string
-    newPostText:string | null
+    newPostText: string | null
 }
 
 type contactType = {

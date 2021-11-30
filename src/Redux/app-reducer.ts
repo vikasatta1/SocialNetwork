@@ -33,13 +33,14 @@ export const setInitializedSuccess = ( initialized: boolean):setInitializedSucce
     type: "SET_INITIALIZED_SUCCESS",
     initialized
 })
-export const initializeApp = () => (dispatch:Dispatch) => {
+export const initializeApp = (/*initialized:boolean*/) => (dispatch:Dispatch) => {
     // @ts-ignore
     let promise = dispatch(getAuthUserDataThunkCreator())
     Promise.all([promise]).then(()=>{
 
+
         // @ts-ignore
-        dispatch(setInitializedSuccess());
+        dispatch(setInitializedSuccess(/*initialized*/));
     });
 
 }

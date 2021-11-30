@@ -45,20 +45,16 @@ export const setAuthUserData = (userId: number | null, email: string, login: str
     }
 })
 
-export const getAuthUserDataThunkCreator = ( ) => (dispatch:Dispatch) => {
-    authAPI.me()
-        .then(response => {
+export const getAuthUserDataThunkCreator = ( ) => async (dispatch:Dispatch) => {
+    let response = await  authAPI.me();
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data;
                dispatch(setAuthUserData(id, email, login, true));
             }
-        });
-    return "brgf"
 }
 
-export const loginThunkCreator = (email:string,password:string, rememberMe:boolean ) => (dispatch:Dispatch) => {
-    authAPI.login(email,password,rememberMe)
-        .then(response => {
+export const loginThunkCreator = (email:string,password:string, rememberMe:boolean ) => async (dispatch:Dispatch) => {
+    let response = await authAPI.login(email,password,rememberMe)
             if (response.data.resultCode === 0) {
                 // @ts-ignore
                 dispatch(getAuthUserDataThunkCreator())
@@ -66,16 +62,13 @@ export const loginThunkCreator = (email:string,password:string, rememberMe:boole
                let messages = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
                 dispatch(stopSubmit("login", {_error:messages}))
             }
-        });
 }
-export const logoutThunkCreator = ( ) => (dispatch:Dispatch) => {
-    authAPI.logout()
-        .then(response => {
+export const logoutThunkCreator = () => async (dispatch:Dispatch) => {
+    let response = await  authAPI.logout()
             if (response.data.resultCode === 0) {
                 // @ts-ignore
                 dispatch(getAuthUserDataThunkCreator(null,null,null,false))
             }
-        });
 }
 
 
