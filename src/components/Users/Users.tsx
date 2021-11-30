@@ -25,7 +25,6 @@ const Users = (props: UsersPropsType) => {
         pages.push(i);
     }
 
-    // @ts-ignore
     return (
         <div>
             <div>

@@ -10,19 +10,21 @@ const ProfileStatusWithHooks = (props: PropsType) => {
     let [editMode, setEditMode] = useState(false)
     let [status, setStatus] = useState(props.status);
 
-    useEffect(()=>{
+    useEffect(() => {
+        debugger
         setStatus(props.status)
-    },[props.status])
+    }, [props.status])
+
     const activateMode = () => {
         setEditMode(true)
     }
 
     const deActivatedEditMode = () => {
-       setEditMode(false)
+        setEditMode(false)
         props.updateStatus(status)
     }
-   const onStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-       setStatus( e.currentTarget.value);
+    const onStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setStatus(e.currentTarget.value);
     }
     return (
         <div>
@@ -37,7 +39,6 @@ const ProfileStatusWithHooks = (props: PropsType) => {
                        onChange={onStatusChange}
                        value={status}
                 />
-
             </div>
             }
         </div>

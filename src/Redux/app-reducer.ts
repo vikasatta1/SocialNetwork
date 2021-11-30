@@ -36,7 +36,7 @@ export const setInitializedSuccess = ( initialized: boolean):setInitializedSucce
 export const initializeApp = () => (dispatch:Dispatch) => {
     // @ts-ignore
     let promise = dispatch(getAuthUserDataThunkCreator())
-    Promise.all([promise]).then(()=>{ // @ts-ignore
+    Promise.all([promise]).then(()=>{
 
         // @ts-ignore
         dispatch(setInitializedSuccess());
