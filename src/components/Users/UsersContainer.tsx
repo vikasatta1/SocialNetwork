@@ -1,9 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/reduxe-store";
-import {
-    UserType, requestUsers, unFollowSuccess, follow, unFollow,
-} from "../../Redux/users-reducer";
+import {follow, requestUsers, unFollow, unFollowSuccess, UserType,} from "../../Redux/users-reducer";
 import {AppActionsType} from "../../Redux/Store";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
@@ -12,10 +10,10 @@ import {
     getCurrentPage,
     getFollowingInProgress,
     getIsFetching,
-    getTotalUsersCount, getUsers,
+    getTotalUsersCount,
+    getUsers,
     setPageSize,
 } from "../../Redux/users-selectors";
-
 
 
 type mapStatePropsType = {
@@ -50,9 +48,11 @@ class UsersContainer extends React.Component<UsersPropsType, AppActionsType> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
+
     onPageChanged = (pageNumber: number) => {
         this.props.getUsers(pageNumber, this.props.pageSize)
     }
+
     render() {
         return <>
             {this.props.isFetching ?
@@ -70,6 +70,7 @@ class UsersContainer extends React.Component<UsersPropsType, AppActionsType> {
         </>
     }
 }
+
 const mapStateProps = (state: AppStateType): mapStatePropsType => {
     console.log("map Users")
     return {
