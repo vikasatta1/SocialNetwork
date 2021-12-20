@@ -1,4 +1,5 @@
-import profileReducer, {addPostActionCreator, AddPostActionType, deletePost, PostsType} from "../profile-reducer";
+import profileReducer, {addPostActionCreator, deletePost} from "../profile-reducer";
+
 const state = {
     profile: null,
     posts: [
