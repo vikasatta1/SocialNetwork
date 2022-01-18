@@ -1,4 +1,4 @@
-import {AppActionsType} from "./Store";
+
 
 const Send = "SEND_MESSAGE"
 export type SendMessageType = {
@@ -39,7 +39,7 @@ export type dialogPageType = {
 
 export type DialogsActionType = SendMessageType
 
-const dialogsReducer = (state = initialState, action: AppActionsType): dialogPageType => {
+const dialogsReducer = (state = initialState, action: SendMessageType): dialogPageType => {
     switch (action.type) {
         case Send:{
                 const body = action.newMessageBody;
