@@ -63,11 +63,11 @@ export const loginThunkCreator = (email:string,password:string, rememberMe:boole
                 dispatch(stopSubmit("login", {_error:messages}))
             }
 }
-export const logoutThunkCreator = () => async (dispatch:Dispatch) => {
+export const logoutThunkCreator = () => async (dispatch:any) => {
     let response = await  authAPI.logout()
             if (response.data.resultCode === 0) {
                 // @ts-ignore
-                dispatch(getAuthUserDataThunkCreator(null,null,null,false))
+                dispatch(setAuthUserData(null,null,null,false))
             }
 }
 

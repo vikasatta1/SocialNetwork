@@ -4,7 +4,6 @@ import {getAuthUserDataThunkCreator} from "./auth-reducer";
 
 type setInitializedSuccess = {
     type: "SET_INITIALIZED_SUCCESS"
-    initialized: boolean
 }
 const initialState = {
     initialized: false
@@ -29,18 +28,14 @@ const appReducer = (state = initialState, action: AppActionsType): AppStateType 
 
 }
 
-export const setInitializedSuccess = ( initialized: boolean):setInitializedSuccess => ({
+export const setInitializedSuccess = ():setInitializedSuccess => ({
     type: "SET_INITIALIZED_SUCCESS",
-    initialized
 })
-export const initializeApp = () => (dispatch:Dispatch) => {
-    // @ts-ignore
+export const initializeApp = () => (dispatch:any) => {
+
     let promise = dispatch(getAuthUserDataThunkCreator())
     Promise.all([promise]).then(()=>{
-
-
-        // @ts-ignore
-        dispatch(setInitializedSuccess(/*initialized*/));
+        dispatch(setInitializedSuccess());
     });
 
 }

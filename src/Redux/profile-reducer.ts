@@ -112,8 +112,8 @@ type contactType = {
 }
 
 type photoType = {
-    small: string,
-    large: string,
+    small: string | null,
+    large: string | null,
 }
 export type ProfileType = {
     aboutMe: string,

@@ -5,7 +5,9 @@ import {DialogsPropsType} from "./DialogsContainer";
 import {Field, reduxForm} from "redux-form";
 import TextArea from "../common/FormsControl/FormsControl";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
-
+export type NewMessageFormValuesType = {
+    newMessageBody: string
+}
 const Message = (props: any) => {
     return (
         <div className={s.message}>{props.message}</div>
