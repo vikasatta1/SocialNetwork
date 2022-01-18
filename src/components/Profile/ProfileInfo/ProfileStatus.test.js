@@ -24,6 +24,7 @@ describe("ProfileStatus component", () => {
         let input = root.findByType("input")
         expect(input.props.value).toBe('it-kamasutra.com')
     });
+
 });
 
 
