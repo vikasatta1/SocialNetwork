@@ -1,7 +1,7 @@
 import {AppActionsType} from "./reduxe-store";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
-import {stat} from "fs";
+
 
 
 const initialState = {
@@ -41,6 +41,8 @@ const profileReducer = (state: profilePageType = initialState, action: AppAction
                 ...state,
                 posts: state.posts.filter(p => p.id != action.postId)
             }
+        case "SET_PHOTO_SUCCESS":
+            return {...state, profile: {...state.profile, photos: action.photos} as any}
         default:
             return state
     }
@@ -54,6 +56,7 @@ export const addPostActionCreator = (newPostText: string): AddPostActionType => 
 export const setUserProfileAC = (user: ProfileType): SetUserProfileType => ({type: "SET_USER_PROFILE", user})
 export const setStatusAC = (status: string): SetStatus => ({type: "SET_STATUS", status})
 export const deletePost = (postId: number) => ({type: "DELETE_POST", postId} as const)
+export const setPhotoSuccess = (photos: File) => ({type: "SET_PHOTO_SUCCESS", photos} as const)
 export const getUserProfileThunkCreator = (userId: any) => (dispatch: Dispatch) => {
     usersAPI.getProfile(userId)
         .then(response => {
@@ -65,10 +68,16 @@ export const getStatusThunk = (userId: any) => async (dispatch: Dispatch) => {
     dispatch(setStatusAC(response.data))
 }
 export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
-    let response = await   profileAPI.updateStatus(status)
-            if (response.data.resultCode === 0) {
-                dispatch(setStatusAC(status))
-            }
+    let response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setStatusAC(status))
+    }
+}
+export const savePhoto = (file: any) => async (dispatch: Dispatch) => {
+    let data = await profileAPI.savePhoto(file)
+    if (data.resultCode === 0) {
+        dispatch(setPhotoSuccess(data.data.photos))
+    }
 }
 export type AddPostActionType = {
     type: "ADD-POST",
@@ -124,12 +133,15 @@ export type ProfileType = {
     userId: number | null,
     photos: photoType
 }
+
 export type ProfileActionsType =
     AddPostActionType
     | ChangeNewPostTextActionType
     | SetUserProfileType
     | SetStatus
     | DeletePostType
+| SetPhotoSuccessType
 type DeletePostType = ReturnType<typeof deletePost>
+type SetPhotoSuccessType = ReturnType<typeof setPhotoSuccess>
 
 export default profileReducer;

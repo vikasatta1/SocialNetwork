@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {
     getStatusThunk,
     getUserProfileThunkCreator,
-    ProfileType,
+    ProfileType, savePhoto,
     updateStatus
 } from "../../../Redux/profile-reducer";
 import {RouteComponentProps, withRouter} from 'react-router';
@@ -27,12 +27,14 @@ type mapDispatchPropsType = {
     getUserProfileThunkCreator: (userId: number | null) => void
     getStatusThunk: (userId: number | null) => void
     updateStatus: (status: string) => void
+    savePhoto: (file: File) => void
 }
 // @ts-ignore
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 class ProfileContainer extends React.Component<PropsType> {
-    componentDidMount() {
+
+    refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.authorizedUserId;
@@ -44,12 +46,25 @@ class ProfileContainer extends React.Component<PropsType> {
         this.props.getStatusThunk(userId)
     }
 
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate() {
+        if (this.props.match.params.userId !== this.props.match.params.userId) {
+            this.refreshProfile()
+        }
+    }
+
     render() {
         return (
             <Profile {...this.props}
+                     isOwner={!this.props.match.params.userId}
                      profile={this.props.profile}
                      status={this.props.status}
                      updateStatus={this.props.updateStatus}
+                     savePhoto={this.props.savePhoto}
+
             />
         )
     }
@@ -65,7 +80,7 @@ const mapStateProps = (state: AppStateType): mapStatePropsType => {
 }
 export default compose<React.ComponentType>(
     connect<mapStatePropsType, mapDispatchPropsType, OwnProps, AppStateType>
-    (mapStateProps, {getUserProfileThunkCreator, getStatusThunk, updateStatus}),
+    (mapStateProps, {getUserProfileThunkCreator, getStatusThunk, updateStatus,savePhoto}),
     withRouter,
     /* WithAuthRedirect*/
 )(ProfileContainer)
