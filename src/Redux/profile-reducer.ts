@@ -39,7 +39,7 @@ const profileReducer = (state: profilePageType = initialState, action: AppAction
         case "DELETE_POST":
             return {
                 ...state,
-                posts: state.posts.filter(p => p.id != action.postId)
+                posts: state.posts.filter(p => p.id !== action.postId)
             }
         case "SET_PHOTO_SUCCESS":
             return {...state, profile: {...state.profile, photos: action.photos} as any}
@@ -109,7 +109,7 @@ export type profilePageType = {
     newPostText: string | null
 }
 
-type contactType = {
+export type ContactType = {
     facebook: string,
     website: string,
     vk: string,
@@ -126,7 +126,7 @@ type photoType = {
 }
 export type ProfileType = {
     aboutMe: string,
-    contacts: contactType
+    contacts: ContactType
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
     fullName: string,
