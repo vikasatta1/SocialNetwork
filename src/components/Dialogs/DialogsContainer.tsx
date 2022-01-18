@@ -4,9 +4,21 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/reduxe-store";
 import {compose, Dispatch} from 'redux';
-import {dialogPageType} from "../../Redux/Store";
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+type MessagesType = {
+    id: number
+    message: string
+}
+type DialogsType = {
+    id: number
+    name: string
+}
+export type dialogPageType = {
+    messages: Array<MessagesType>
+    dialogs: Array<DialogsType>
+    newMessageBody: string
+}
 type MapStatePropsType = {
     dialogsPage: dialogPageType
 }

@@ -13,8 +13,9 @@ const Message = (props: any) => {
 }
 const Dialogs = (props: DialogsPropsType) => {
     const state = props.dialogsPage;
-    const dialogsElements = state.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>);
-    const messagesElements = state.messages.map( m => <Message key={m.id} message={m.message}/>);
+
+    const dialogsElements = state.dialogs.map((d:any )=> <DialogItem key={d.id} name={d.name} id={d.id}/>);
+    const messagesElements = state.messages.map( (m:any) => <Message key={m.id} message={m.message}/>);
     const newMessageBody = state.newMessageBody;
 
 

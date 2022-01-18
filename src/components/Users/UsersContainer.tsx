@@ -1,8 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/reduxe-store";
-import {follow, requestUsers, unFollow, unFollowSuccess, UserType,} from "../../Redux/users-reducer";
-import {AppActionsType} from "../../Redux/Store";
+import {follow, requestUsers, unFollow, unFollowSuccess, UsersACType, UserType,} from "../../Redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
@@ -14,15 +13,17 @@ import {
     getUsers,
     setPageSize,
 } from "../../Redux/users-selectors";
+import {ProfileActionsType} from "../../Redux/profile-reducer";
+import {DialogsActionType} from "../../Redux/dialogs-reducer";
 
 
 type mapStatePropsType = {
-    users: Array<UserType>
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-    followingInProgress: []
+    users: Array<UserType>,
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage: number,
+    isFetching: boolean,
+    followingInProgress: any,
 }
 
 type mapDispatchToProps = {
@@ -85,3 +86,4 @@ const mapStateProps = (state: AppStateType): mapStatePropsType => {
 export default compose(
     connect<mapStatePropsType, mapDispatchToProps, {}, AppStateType>
     (mapStateProps, {follow, unFollow, unFollowSuccess, getUsers: requestUsers}))(UsersContainer)
+type AppActionsType = ProfileActionsType | DialogsActionType | UsersACType
