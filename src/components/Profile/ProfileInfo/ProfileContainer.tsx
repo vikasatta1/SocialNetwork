@@ -65,6 +65,7 @@ class ProfileContainer extends React.Component<PropsType> {
                      updateStatus={this.props.updateStatus}
                      savePhoto={this.props.savePhoto}
 
+
             />
         )
     }

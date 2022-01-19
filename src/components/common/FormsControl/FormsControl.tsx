@@ -44,6 +44,19 @@ export const Input = ({input,meta,...props}:any) => {
 
     )
 };
+export function createField<FormKeysType extends string>(placeholder: string | undefined,
+                                                         name: FormKeysType,
+                                                         validators: Array<any>,
+                                                         component: React.FC<any>,
+                                                         props = {}, text = "") {
+    return <div>
+        <Field placeholder={placeholder} name={name}
+               validate={validators}
+               component={component}
+               {...props}
+        /> {text}
+    </div>
+}
 
 
 
