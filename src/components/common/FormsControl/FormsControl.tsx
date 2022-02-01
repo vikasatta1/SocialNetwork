@@ -1,21 +1,8 @@
-import React, {ReactElement} from 'react';
+import React from 'react';
 import styles from './FormControls.module.css'
 import {Field} from "redux-form";
-import {required} from "../../../utils/validators/validators";
 
 
- const FormControl = ({input,meta, child,...props}:any) => {
-     const hasError = meta.touched && meta.error;
-     return (
-         <div className={styles.formControl + " " + ( hasError ? styles.error : '')}>
-             <div>
-                 {props.child}
-             </div>
-             {hasError && <span>{meta.error}</span>}
-         </div>
-
-     )
-}
 
 
  const TextArea = ({input,meta,...props}:any) => {
@@ -58,7 +45,7 @@ export function createField<FormKeysType extends string>(placeholder: string | u
     </div>
 }
 
-
+export type GetStringKeys<T> = Extract<keyof T, string>
 
 
 export default TextArea;

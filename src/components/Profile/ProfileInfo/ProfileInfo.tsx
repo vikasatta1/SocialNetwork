@@ -17,7 +17,7 @@ type ProfileInfoType = {
 }
 
 const ProfileInfo = (props: ProfileInfoType) => {
-    let [editMode, setEditMode] = useState<boolean>(false);
+    let [editMode, setEditMode] = useState(false);
     if (!props.profile) {
         return <Preloader/>
     }
@@ -27,16 +27,23 @@ const ProfileInfo = (props: ProfileInfoType) => {
         }
 
     }
+const onSubmit =() => {
+
+}
+
+
 
     return (
         <div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large || userPhoto} className={s.mainPhoto}/>
                 {props.isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
-                {editMode ? <ProfileDataForm profile={props.profile}/>
-                    : <ProfileData goToEditMode={() => {
-                        setEditMode(true)
-                    }} profile={props.profile} isOwner={props.isOwner}/>}
+                // @ts-ignore
+                {editMode ? <
+                        // @ts-ignore
+                    ProfileDataForm profile={props.profile}/>
+                    : <ProfileData goToEditMode={() => {debugger
+                        setEditMode(true)}} profile={props.profile} isOwner={props.isOwner}/>}
                 < ProfileStatusWithHooks
                     status={props.status}
                     updateStatus={props.updateStatus}
@@ -60,7 +67,9 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, goToEdit
     return (
         <div>
             {isOwner && <div>
-                <button onClick={goToEditMode}>edit</button>
+                <button
+
+                    onClick={goToEditMode}>edit</button>
             </div>}
             <div>
                 <b>Full name:</b>{profile.fullName}
