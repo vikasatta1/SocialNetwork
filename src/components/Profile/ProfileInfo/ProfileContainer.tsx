@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {
     getStatusThunk,
     getUserProfileThunkCreator,
-    ProfileType, savePhoto,
+    ProfileType, savePhoto, saveProfile,
     updateStatus
 } from "../../../Redux/profile-reducer";
 import {RouteComponentProps, withRouter} from 'react-router';
@@ -28,6 +28,7 @@ type mapDispatchPropsType = {
     getStatusThunk: (userId: number | null) => void
     updateStatus: (status: string) => void
     savePhoto: (file: File) => void
+    saveProfile:(formData: ProfileType) => void
 }
 // @ts-ignore
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
@@ -64,6 +65,7 @@ class ProfileContainer extends React.Component<PropsType> {
                      status={this.props.status}
                      updateStatus={this.props.updateStatus}
                      savePhoto={this.props.savePhoto}
+                     saveProfile={this.props.saveProfile}
 
 
             />
@@ -81,7 +83,7 @@ const mapStateProps = (state: AppStateType): mapStatePropsType => {
 }
 export default compose<React.ComponentType>(
     connect<mapStatePropsType, mapDispatchPropsType, OwnProps, AppStateType>
-    (mapStateProps, {getUserProfileThunkCreator, getStatusThunk, updateStatus,savePhoto}),
+    (mapStateProps, {getUserProfileThunkCreator, getStatusThunk, updateStatus,savePhoto,saveProfile}),
     withRouter,
     /* WithAuthRedirect*/
 )(ProfileContainer)
