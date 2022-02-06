@@ -38,7 +38,7 @@ const AddPostFormRedux = reduxForm<FormDataType>({
 
 const MyPosts = React.memo((props:MyPostType) =>{
     const postsElements =
-        props.posts.map((p: { message: string; likesCount: number; }) => <Post message={p.message}
+        props.posts.map((p: { message: string; likesCount: number; id:number}) => <Post key={p.id} message={p.message}
                                                                                likesCount={p.likesCount}/>)
     const newPostElement = React.createRef<HTMLTextAreaElement>();
     let onAddPost = (values: any) => {

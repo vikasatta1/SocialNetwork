@@ -1,6 +1,6 @@
 import {AppActionsType} from "./reduxe-store";
 import {Dispatch} from "redux";
-import {profileAPI, usersAPI} from "../api/api";
+import {profileAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
 
@@ -11,7 +11,8 @@ const initialState = {
         {id: 2, message: "it's my first post", likesCount: 11},
     ],
     newPostText: '',
-    status: ""
+    status: "",
+
 }
 const profileReducer = (state: profilePageType = initialState, action: AppActionsType): profilePageType => {
     switch (action.type) {
@@ -61,7 +62,7 @@ export const setPhotoSuccess = (photos: File) => ({type: "SET_PHOTO_SUCCESS", ph
 
 //thunk
 export const getUserProfileThunkCreator = (userId: any) => (dispatch: Dispatch) => {
-    usersAPI.getProfile(userId)
+    profileAPI.getProfile(userId)
         .then(response => {
             dispatch(setUserProfileAC(response.data));
         })
@@ -91,7 +92,8 @@ export const saveProfile = (profile: ProfileType) => async (dispatch: Dispatch, 
             // @ts-ignore
             dispatch(getUserProfileThunkCreator(userId))
         } else {
-            dispatch(stopSubmit("login", {_error:response.data.message[0]}))
+            dispatch(stopSubmit("edit-profile", {_error:response.data.messages[0]}))
+            return Promise.reject(response.data.messages[0])
             throw new Error("userId can't be null")
         }
     }

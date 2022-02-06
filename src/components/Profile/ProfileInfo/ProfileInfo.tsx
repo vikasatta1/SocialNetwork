@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
-import {ContactType, ProfileType, savePhoto} from "../../../Redux/profile-reducer";
+import {ContactType, ProfileType} from "../../../Redux/profile-reducer";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../images/user.png";
 import ProfileDataForm from "./ProfileDataForm";
@@ -12,7 +12,7 @@ type ProfileInfoType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (file: File) => void
-    saveProfile:(formData: ProfileType) => void
+    saveProfile: (formData: ProfileType) => any
 
 }
 
@@ -28,8 +28,11 @@ const ProfileInfo = (props: ProfileInfoType) => {
 
     }
     const onSubmit = (formData: ProfileType) => {
-        props.saveProfile(formData)
-        setEditMode(false)
+       props.saveProfile(formData)
+       .then(() => {
+            setEditMode(false)
+        })
+
     }
 
 
@@ -41,15 +44,11 @@ const ProfileInfo = (props: ProfileInfoType) => {
 
                 {editMode ? <
                         // @ts-ignore
-                        ProfileDataForm initialValues={props.profile } profile={props.profile} onSubmit={onSubmit}/>
+                        ProfileDataForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit}/>
                     : <ProfileData goToEditMode={() => {
-                        debugger
                         setEditMode(true)
                     }} profile={props.profile} isOwner={props.isOwner}/>}
-                < ProfileStatusWithHooks
-                    status={props.status}
-                    updateStatus={props.updateStatus}
-                />
+                < ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     );
