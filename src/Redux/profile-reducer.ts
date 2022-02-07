@@ -72,9 +72,13 @@ export const getStatusThunk = (userId: any) => async (dispatch: Dispatch) => {
     dispatch(setStatusAC(response.data))
 }
 export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
-    let response = await profileAPI.updateStatus(status)
-    if (response.data.resultCode === 0) {
-        dispatch(setStatusAC(status))
+    try {
+        let response = await profileAPI.updateStatus(status)
+        if (response.data.resultCode === 0) {
+            dispatch(setStatusAC(status))
+        }
+    } catch (error) {
+
     }
 }
 export const savePhoto = (file: any) => async (dispatch: Dispatch) => {
@@ -92,7 +96,7 @@ export const saveProfile = (profile: ProfileType) => async (dispatch: Dispatch, 
             // @ts-ignore
             dispatch(getUserProfileThunkCreator(userId))
         } else {
-            dispatch(stopSubmit("edit-profile", {_error:response.data.messages[0]}))
+            dispatch(stopSubmit("edit-profile", {_error: response.data.messages[0]}))
             return Promise.reject(response.data.messages[0])
             throw new Error("userId can't be null")
         }

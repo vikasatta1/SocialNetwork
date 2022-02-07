@@ -28,7 +28,7 @@ type mapDispatchPropsType = {
     getStatusThunk: (userId: number | null) => void
     updateStatus: (status: string) => void
     savePhoto: (file: File) => void
-    saveProfile:(formData: ProfileType) => void
+    saveProfile: (formData: ProfileType) => void
 }
 // @ts-ignore
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
@@ -83,7 +83,5 @@ const mapStateProps = (state: AppStateType): mapStatePropsType => {
 }
 export default compose<React.ComponentType>(
     connect<mapStatePropsType, mapDispatchPropsType, OwnProps, AppStateType>
-    (mapStateProps, {getUserProfileThunkCreator, getStatusThunk, updateStatus,savePhoto,saveProfile}),
-    withRouter,
-    /* WithAuthRedirect*/
-)(ProfileContainer)
+    (mapStateProps, {getUserProfileThunkCreator, getStatusThunk, updateStatus, savePhoto, saveProfile}),
+    withRouter,)(ProfileContainer)
